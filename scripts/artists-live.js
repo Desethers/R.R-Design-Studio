@@ -4,7 +4,7 @@
  * Remplace le grid statique par les données Gallery-OS/Sanity.
  * L'API est la source de vérité pour le roster des artistes.
  *
- *   • API disponible → le grid est vidé et reconstruit depuis Sanity
+ *   • API disponible → les cartes correspondantes sont actualisées depuis Sanity
  *   • API indisponible → fallback silencieux, le HTML statique reste affiché
  *
  * Inclure dans artists.html :
@@ -84,10 +84,34 @@
     const grid = document.querySelector('.artists-grid')
     if (!grid) return
 
-    // API disponible → elle est source de vérité pour le roster
-    grid.innerHTML = ''
+    // Keep the authored roster visible when the API only contains a partial list.
+    const existingCards = new Map()
+    grid.querySelectorAll('.artist-card').forEach(function (card) {
+      const name = card.querySelector('h2')?.textContent?.trim()
+      if (name) existingCards.set(name.toLowerCase(), card)
+    })
+
     data.forEach(function (artist) {
-      grid.insertAdjacentHTML('beforeend', cardHTML(artist))
+      const name = artistName(artist)
+      const card = existingCards.get(name.toLowerCase())
+
+      if (!card) {
+        grid.insertAdjacentHTML('beforeend', cardHTML(artist))
+        return
+      }
+
+      card.href = artistHref(artist)
+      if (artist.slug) card.dataset.artistSlug = artist.slug
+
+      const heading = card.querySelector('h2')
+      if (heading) heading.textContent = name
+
+      const img = card.querySelector('img')
+      const src = imgUrl(artist, 800)
+      if (img && src) {
+        img.src = src
+        img.alt = name
+      }
     })
 
     document.dispatchEvent(new CustomEvent('artists:loaded', { detail: data }))

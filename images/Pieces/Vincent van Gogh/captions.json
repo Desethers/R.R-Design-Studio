@@ -1,0 +1,98 @@
+[
+  {
+    "file": "shoes-1888.jpg",
+    "title": "Shoes",
+    "artist": "Vincent van Gogh",
+    "year": "1888",
+    "medium": "Oil on canvas",
+    "dimensions": "45.7 × 55.2 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Purchase, The Annenberg Foundation Gift, 1992",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436533"
+  },
+  {
+    "file": "wheat-field-with-cypresses-1889.jpg",
+    "title": "Wheat Field with Cypresses",
+    "artist": "Vincent van Gogh",
+    "year": "1889",
+    "medium": "Oil on canvas",
+    "dimensions": "73.2 × 93.4 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Purchase, The Annenberg Foundation Gift, 1993",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436535"
+  },
+  {
+    "file": "irises-1890.jpg",
+    "title": "Irises",
+    "artist": "Vincent van Gogh",
+    "year": "1890",
+    "medium": "Oil on canvas",
+    "dimensions": "73.7 × 92.1 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Gift of Adele R. Levy, 1958",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436528"
+  },
+  {
+    "file": "self-portrait-straw-hat-1887.jpg",
+    "title": "Self-Portrait with a Straw Hat",
+    "artist": "Vincent van Gogh",
+    "year": "1887",
+    "medium": "Oil on canvas",
+    "dimensions": "40.6 × 31.8 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Bequest of Miss Adelaide Milton de Groot, 1967",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436532"
+  },
+  {
+    "file": "sunflowers-1887.jpg",
+    "title": "Sunflowers",
+    "artist": "Vincent van Gogh",
+    "year": "1887",
+    "medium": "Oil on canvas",
+    "dimensions": "43.2 × 61 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Rogers Fund, 1949",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436524"
+  },
+  {
+    "file": "oleanders-1888.jpg",
+    "title": "Oleanders",
+    "artist": "Vincent van Gogh",
+    "year": "1888",
+    "medium": "Oil on canvas",
+    "dimensions": "60.3 × 73.7 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Gift of Mr. and Mrs. John L. Loeb, 1962",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436530"
+  },
+  {
+    "file": "women-picking-olives-1889.jpg",
+    "title": "Women Picking Olives",
+    "artist": "Vincent van Gogh",
+    "year": "1889",
+    "medium": "Oil on canvas",
+    "dimensions": "72.7 × 91.4 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "The Walter H. and Leonore Annenberg Collection, Gift of Walter H. and Leonore Annenberg, 1995, Bequest of Walter H. Annenberg, 2002",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436536"
+  },
+  {
+    "file": "cypresses-1889.jpg",
+    "title": "Cypresses",
+    "artist": "Vincent van Gogh",
+    "year": "1889",
+    "medium": "Oil on canvas",
+    "dimensions": "93.4 × 74 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Rogers Fund, 1949",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/437980"
+  }
+]

@@ -1,0 +1,130 @@
+[
+  {
+    "file": "wheat-field-with-cypresses-van-gogh.jpg",
+    "title": "Wheat Field with Cypresses",
+    "artist": "Vincent van Gogh",
+    "year": "1889",
+    "medium": "Oil on canvas",
+    "dimensions": "73.2 × 93.4 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Purchase, The Annenberg Foundation Gift, 1993",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436535"
+  },
+  {
+    "file": "cypresses-van-gogh.jpg",
+    "title": "Cypresses",
+    "artist": "Vincent van Gogh",
+    "year": "1889",
+    "medium": "Oil on canvas",
+    "dimensions": "93.4 × 74 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Rogers Fund, 1949",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/437980"
+  },
+  {
+    "file": "still-life-apples-primroses-cezanne.jpg",
+    "title": "Still Life with Apples and a Pot of Primroses",
+    "artist": "Paul Cézanne",
+    "year": "ca. 1890",
+    "medium": "Oil on canvas",
+    "dimensions": "73 × 92.4 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Bequest of Sam A. Lewisohn, 1951",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/435882"
+  },
+  {
+    "file": "ia-orana-maria-gauguin.jpg",
+    "title": "Ia Orana Maria (Hail Mary)",
+    "artist": "Paul Gauguin",
+    "year": "1891",
+    "medium": "Oil on canvas",
+    "dimensions": "113.7 × 87.6 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Bequest of Sam A. Lewisohn, 1951",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/438821"
+  },
+  {
+    "file": "circus-sideshow-seurat.jpg",
+    "title": "Circus Sideshow (Parade de cirque)",
+    "artist": "Georges Seurat",
+    "year": "1887–88",
+    "medium": "Oil on canvas",
+    "dimensions": "99.7 × 149.9 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "Bequest of Stephen C. Clark, 1960",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/437654"
+  },
+  {
+    "file": "the-dancing-class-degas.jpg",
+    "title": "The Dancing Class",
+    "artist": "Edgar Degas",
+    "year": "ca. 1870",
+    "medium": "Oil on wood",
+    "dimensions": "19.7 × 27 cm",
+    "source": "The Metropolitan Museum of Art",
+    "creditLine": "H. O. Havemeyer Collection, Bequest of Mrs. H. O. Havemeyer, 1929",
+    "license": "Public domain (CC0)",
+    "objectURL": "https://www.metmuseum.org/art/collection/search/436141"
+  },
+  {
+    "file": "composition-vii-kandinsky.jpg",
+    "title": "Composition VII",
+    "artist": "Wassily Kandinsky",
+    "year": "1913",
+    "medium": "Oil on canvas",
+    "dimensions": "200 × 300 cm",
+    "source": "Tretyakov Gallery (via Wikimedia Commons)",
+    "creditLine": "wassilykandinsky.net",
+    "license": "Public domain",
+    "objectURL": "https://commons.wikimedia.org/wiki/File:Vassily_Kandinsky,_1913_-_Composition_7.jpg"
+  },
+  {
+    "file": "the-swan-no-10-af-klint.jpg",
+    "title": "Group IX/SUW, The Swan, No. 10",
+    "artist": "Hilma af Klint",
+    "year": "1915",
+    "medium": "Oil on canvas",
+    "source": "Wikimedia Commons",
+    "creditLine": "Photographed by Rhododendrites",
+    "license": "Public domain",
+    "objectURL": "https://commons.wikimedia.org/wiki/File:Hilma_af_Klint_-_Group_IX_SUW,_The_Swan_No._10_(13932).jpg"
+  },
+  {
+    "file": "fire-in-the-evening-klee.jpg",
+    "title": "Fire in the Evening (Feuer Abends)",
+    "artist": "Paul Klee",
+    "year": "1929",
+    "medium": "Oil on cardboard",
+    "source": "Museum of Modern Art, via Wikimedia Commons",
+    "creditLine": "MoMA",
+    "license": "Public domain",
+    "objectURL": "https://commons.wikimedia.org/wiki/File:Fire_in_the_Evening_by_Paul_Klee_in_the_MOMA.jpg"
+  },
+  {
+    "file": "suprematist-composition-malevich.jpg",
+    "title": "Suprematist Composition",
+    "artist": "Kazimir Malevich",
+    "year": "1916",
+    "medium": "Oil on canvas",
+    "source": "Wikimedia Commons",
+    "creditLine": "",
+    "license": "Public domain",
+    "objectURL": "https://commons.wikimedia.org/wiki/File:Kazimir_Malevich_-_%27Suprematist_Composition%27,_1916.jpg"
+  },
+  {
+    "file": "composition-no-iv-mondrian.jpg",
+    "title": "Composition No. IV",
+    "artist": "Piet Mondrian",
+    "year": "1911–14",
+    "medium": "Oil on canvas",
+    "source": "Wikimedia Commons",
+    "creditLine": "",
+    "license": "Public domain",
+    "objectURL": "https://commons.wikimedia.org/wiki/File:Composition_No_IV,_by_Piet_Mondriaan.jpg"
+  }
+]

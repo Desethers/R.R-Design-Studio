@@ -52,14 +52,18 @@
 
   function workCardHTML(w) {
     var alt = esc(w.title + (w.year ? ', ' + w.year : ''))
+    var imageUrl = w.imageUrl
+    if (SLUG === 'sacha-elron' && (w.title || '').toLowerCase() === 'evening field') {
+      imageUrl = 'images/Pieces/Sacha%20Elron/painting-05.jpg'
+    }
     var detailLines = ''
     if (w.medium)     detailLines += '<span class="work-card-detail-line">' + esc(w.medium) + '</span>'
     if (w.dimensions) detailLines += '<span class="work-card-detail-line">' + esc(w.dimensions) + '</span>'
     return (
       '<a href="#" class="work-card">' +
         '<figure>' +
-          (w.imageUrl
-            ? '<img src="' + imgSrc(w.imageUrl, 1000) + '" alt="' + alt + '" width="800" height="1000" loading="lazy" decoding="async" />'
+          (imageUrl
+            ? '<img src="' + imgSrc(imageUrl, 1000) + '" alt="' + alt + '" width="800" height="1000" loading="lazy" decoding="async" />'
             : '<div style="width:100%;aspect-ratio:4/5;background:#f4f4f5"></div>') +
         '</figure>' +
         '<div class="work-card-body">' +
@@ -150,8 +154,8 @@
     }
 
     // Bio (teaser visible + extended for the modal)
-    fillHTML('#bio', data.bioHtml || '')
-    fillHTML('#bioExtended', data.bioExtendedHtml || '')
+    if (data.bioHtml) fillHTML('#bio', data.bioHtml)
+    if (data.bioExtendedHtml) fillHTML('#bioExtended', data.bioExtendedHtml)
     // Hide the "read full biography" CTA when there is no extended bio
     var cta = document.querySelector('.artist-cta-row')
     if (cta) cta.style.display = data.bioExtendedHtml ? '' : 'none'

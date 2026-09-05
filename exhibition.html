@@ -237,6 +237,7 @@
       <nav class="main-nav" aria-label="Main navigation">
         <a href="exhibitions.html">Exhibitions</a>
         <a href="artists.html">Artists</a>
+        <a href="library.html">Library</a>
         <a href="#">Fairs</a>
         <a href="#">News</a>
         <a href="index.html#about">About</a>
@@ -258,6 +259,7 @@
         </form>
         <a href="exhibitions.html">Exhibitions</a>
         <a href="artists.html">Artists</a>
+        <a href="library.html">Library</a>
         <a href="#">Fairs</a>
         <a href="#">News</a>
         <a href="index.html#about">About</a>
@@ -417,6 +419,7 @@
         </a>
       </nav>
       <nav class="footer-links" aria-label="Footer">
+        <a href="library.html">Library</a>
         <a href="#">The Gallery</a>
         <a href="#">Jobs</a>
         <a href="#">Terms</a>
@@ -472,7 +475,13 @@
   </script>
 
   <!-- ── Exhibition data loader ─────────────────────────────────────────────── -->
-  <script>window.GALLERY_API = window.GALLERY_API || 'https://gallery-os-ten.vercel.app';</script>
+  <script>
+    window.GALLERY_API = window.GALLERY_API || (
+      location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+        ? 'http://localhost:3001'
+        : 'https://gallery-os-ten.vercel.app'
+    );
+  </script>
   <script>
   (function () {
     'use strict';
@@ -503,7 +512,9 @@
     }
 
     // ── Parse slug from URL ──────────────────────────────────────────────────
-    var slug = new URLSearchParams(window.location.search).get('slug');
+    var pageParams = new URLSearchParams(window.location.search);
+    var slug = pageParams.get('slug');
+    var preview = pageParams.get('preview') === '1';
 
     if (!slug) {
       showError();
@@ -511,7 +522,11 @@
     }
 
     // ── Fetch ────────────────────────────────────────────────────────────────
-    fetch(GALLERY_API + '/api/public/exhibitions/' + encodeURIComponent(slug), { cache: 'no-store' })
+    // preview=1 (dashboard editor iframe only) asks the API for the draft,
+    // including unpublished edits, instead of the live public content.
+    var exhibitionApiUrl = GALLERY_API + '/api/public/exhibitions/' + encodeURIComponent(slug) +
+      (preview ? '?preview=1' : '');
+    fetch(exhibitionApiUrl, { cache: 'no-store' })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();

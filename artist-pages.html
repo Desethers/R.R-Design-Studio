@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artist Pages - Galerie Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink: #f5f5f2; --muted: #929292; --line: #383838; --chrome: #121212; --paper: #fff; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { color: var(--ink); background: var(--chrome); font-family: Inter, Arial, sans-serif; font-size: 13px; }
+    button { font: inherit; }
+    .preview-bar { height: 56px; padding: 0 1.25rem; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; border-bottom: 1px solid var(--line); background: var(--chrome); }
+    .back-link { justify-self: start; display: inline-flex; align-items: center; gap: .6rem; color: var(--ink); text-decoration: none; }
+    .back-link__arrow { color: var(--muted); font-size: 16px; line-height: 1; transition: transform .18s ease, color .18s ease; }
+    .back-link:hover .back-link__arrow { color: var(--ink); transform: translateX(-2px); }
+    .back-link__section { color: var(--muted); }
+    .page-toggle { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: #1b1b1b; }
+    .page-toggle button { min-height: 30px; padding: .3rem 1rem; color: #a5a5a5; background: transparent; border: 0; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: color .18s ease, background .18s ease; }
+    .page-toggle button:hover { color: var(--ink); }
+    .page-toggle button[aria-pressed="true"] { color: #111; background: #f5f5f2; }
+    .page-preview { display: block; width: 100%; height: calc(100% - 56px); border: 0; background: var(--paper); opacity: 1; transition: opacity .16s ease; }
+    .page-preview.is-loading { opacity: .72; }
+    @media (max-width: 640px) {
+      .preview-bar { height: 100px; padding: .7rem 1rem; grid-template-columns: 1fr auto; grid-template-rows: auto auto; }
+      .page-toggle { grid-column: 1 / -1; grid-row: 2; justify-self: stretch; }
+      .page-toggle button { flex: 1; }
+      .page-preview { height: calc(100% - 100px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="preview-bar">
+    <a class="back-link" href="library.html" aria-label="Back to library">
+      <span class="back-link__arrow" aria-hidden="true">&larr;</span>
+      <span>Library</span>
+      <span class="back-link__section">/ Artist pages</span>
+    </a>
+    <div class="page-toggle" role="group" aria-label="Artist page">
+      <button type="button" aria-pressed="true" data-page="artist.html">Template</button>
+      <button type="button" aria-pressed="false" data-page="artist-a1.html">Sacha Elron</button>
+    </div>
+  </header>
+
+  <iframe class="page-preview" id="artistPagePreview" src="artist.html" title="Artist page preview"></iframe>
+
+  <script>
+    const preview = document.getElementById('artistPagePreview');
+    const pageButtons = document.querySelectorAll('[data-page]');
+
+    pageButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        pageButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        preview.classList.add('is-loading');
+        preview.src = button.dataset.page;
+      });
+    });
+
+    preview.addEventListener('load', () => preview.classList.remove('is-loading'));
+  </script>
+</body>
+</html>
