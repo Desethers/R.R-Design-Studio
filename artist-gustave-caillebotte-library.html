@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gustave Caillebotte – Galerie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── ARTIST DETAIL PAGE ─────────────────────────── */
+
+    @media (min-width: 1025px) {
+      :root { --gutter: 2.5rem; }
+    }
+
+    html,
+    body {
+      cursor: default;
+      scrollbar-width: none;
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar { display: none; }
+    a,
+    button,
+    [role="button"],
+    [role="tab"] {
+      cursor: pointer;
+    }
+
+    .artist-hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem var(--gutter) 0;
+    }
+    .artist-hero-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (min-width: 641px) {
+      .artist-hero-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+      }
+    }
+    @media (min-width: 1025px) {
+      .artist-hero-inner {
+        grid-template-columns: 300px 1fr;
+        gap: 10rem;
+      }
+    }
+
+    .artist-portrait {
+      width: min(100%, 300px);
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .artist-info {
+      padding-top: .5rem;
+    }
+    @media (min-width: 1025px) and (max-width: 1440px) {
+      .artist-info {
+        padding-left: 30px;
+      }
+    }
+    .artist-info h1 {
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400;
+      letter-spacing: -.01em;
+      line-height: 1.15;
+      margin-bottom: .6rem;
+    }
+    .artist-meta {
+      font-size: .82rem;
+      color: var(--muted);
+      letter-spacing: .02em;
+      margin-bottom: 1.8rem;
+    }
+    .artist-bio {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text);
+      max-width: 64ch;
+    }
+    .artist-bio p + p {
+      margin-top: 1rem;
+    }
+    .artist-cta-row {
+      display: flex;
+      gap: .8rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 6px 1.75rem;
+      border: 1px solid var(--black);
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 400;
+      letter-spacing: .03em;
+      background: transparent;
+      color: var(--black);
+      transition: background .2s, color .2s;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    /* ── SELECTED WORKS SECTION ─────────────────────── */
+    .artist-works {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 3rem var(--gutter) 0;
+    }
+    .artist-works .section-title {
+      font-size: .7rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: .22em;
+      color: var(--text);
+      margin-bottom: 1.75rem;
+    }
+    .works-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 641px) {
+      .works-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+    @media (min-width: 861px) {
+      .works-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    }
+    /* Works : plus d’air entre les rangées (sans toucher image ↔ légende dans .work-card) */
+    #panel-works .works-grid {
+      row-gap: 2.75rem;
+      column-gap: 1.5rem;
+    }
+
+    /* Même logique que .artist-card (liste Artists) : image pleine largeur, coins arrondis, texte dessous */
+    .work-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      border: none;
+      border-radius: 14px;
+      overflow: hidden;
+      background: transparent;
+      color: inherit;
+      text-decoration: none;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      transition: transform .22s ease, background-color .22s ease;
+      content-visibility: auto;
+      contain-intrinsic-size: auto 400px;
+    }
+    .work-card:hover {
+      transform: translateY(-2px);
+      background-color: #edf8ff;
+    }
+    /* Cartes .work-card (Works, Exhibitions, News) : halo bleu un peu plus large au survol */
+    #works .works-grid .work-card {
+      transition: transform .22s ease, background-color .22s ease, padding .22s ease, margin .22s ease;
+    }
+    #works .works-grid .work-card:hover {
+      padding: calc(0.5rem + 4px);
+      margin: -4px;
+    }
+    .work-card figure {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      background: transparent;
+    }
+    /* Works : coins légèrement plus serrés ; position relative pour l’icône lightbox (::after) */
+    #panel-works .work-card figure {
+      border-radius: 8px;
+      position: relative;
+      padding: 2px;
+      box-sizing: border-box;
+      transition: padding 0.22s ease;
+    }
+    #panel-works .work-card:hover figure {
+      padding: 4px;
+    }
+    #panel-works .work-card figure img {
+      border-radius: 6px;
+      transition: transform 0.4s ease, border-radius 0.22s ease;
+    }
+    #panel-works .work-card:nth-child(1) figure img,
+    #panel-works .work-card:nth-child(3) figure img {
+      transform: scale(1.08);
+    }
+    #panel-works .work-card:hover figure img {
+      border-radius: 4px;
+    }
+    #panel-news .work-card:hover img {
+      transform: none;
+    }
+    .work-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .work-card:hover img {
+      transform: none;
+    }
+    .work-card-body {
+      padding: 0;
+      margin: 0;
+    }
+    .work-card-title {
+      font-size: .9rem;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 1.35;
+      margin: 0 0 0.35rem;
+    }
+    /* Nom d’artiste au-dessus du titre (Selected Works) */
+    #panel-works .work-card-artist {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.04em;
+      margin: 0 0 0.35rem;
+      line-height: 1.3;
+    }
+    /* Date sur la même ligne : « titre, date » */
+    .work-card-title .work-card-date {
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .work-card-detail {
+      font-size: .72rem;
+      font-weight: 400;
+      line-height: 1.4;
+      color: var(--muted);
+      letter-spacing: .02em;
+      margin: 0;
+    }
+    /* Selected Works : détail en medium + italique, technique / dimensions sur deux lignes */
+    #panel-works .work-card-detail {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.45;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    #panel-works .work-card-detail .work-card-detail-line {
+      display: block;
+    }
+
+    /* ── NEWS : même style que Press (bordure, arrondi, texte hiérarchisé) ── */
+    #panel-news .work-card {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    #panel-news .work-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(0,0,0,.08);
+      background-color: var(--white);
+    }
+    #panel-news .work-card figure {
+      border-radius: 8px;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+    #panel-news .work-card-body {
+      padding: 1.1rem 1.35rem 1.4rem;
+    }
+    #panel-news .work-card-title {
+      font-size: clamp(.95rem, 1.4vw, 1.15rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -.025em;
+      color: var(--text);
+      margin: 0 0 .55rem;
+      font-style: normal;
+    }
+    #panel-news .work-card-detail {
+      font-size: .8rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text);
+      letter-spacing: -.01em;
+      margin: 0;
+      font-style: normal;
+    }
+
+    /* ── PRESS : cartes type “metric card” (héros + air + sous-titre + corps) ── */
+    #panel-press .press-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    @media (min-width: 520px) {
+      #panel-press .press-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (min-width: 900px) {
+      #panel-press .press-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem 1.1rem;
+      }
+    }
+    #panel-press .press-card {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      height: 100%;
+    }
+    #panel-press .press-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+    }
+    #panel-press .press-card-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      align-content: flex-start;
+      min-height: 20.5rem;
+      height: 100%;
+      padding: 1.6rem 1.35rem 1.65rem;
+      text-align: left;
+      box-sizing: border-box;
+    }
+    /* Bloc “héros” = titre d’article (taille modérée) */
+    #panel-press .press-card-hero {
+      font-size: clamp(1rem, 1.65vw, 1.28rem);
+      font-weight: 600;
+      line-height: 1.18;
+      letter-spacing: -0.028em;
+      color: var(--text);
+      margin: 0;
+      font-style: normal;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
+    }
+    #panel-press .press-card-spacer {
+      flex: 1 1 auto;
+      min-height: 2.75rem;
+    }
+    /* Sous-titre type “Market Share” = source / date */
+    #panel-press .press-card-subtitle {
+      font-size: 0.8rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text);
+      margin: 0 0 0.55rem;
+      letter-spacing: -0.01em;
+    }
+    /* Corps d’article : gris, lecture confortable */
+    #panel-press .press-card-excerpt {
+      font-size: 0.74rem;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--muted);
+      margin: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      overflow: hidden;
+    }
+
+    /* ── CV (onglet Biography dans #works) ───────────── */
+    .cv-columns {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 641px) {
+      .cv-columns { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    }
+    .cv-block h3 {
+      font-size: .78rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: .12em;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .cv-block ul {
+      list-style: none;
+      padding: 0;
+    }
+    .cv-block li {
+      font-size: .82rem;
+      line-height: 1.65;
+      color: var(--text);
+      padding: .3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cv-block li:last-child {
+      border-bottom: none;
+    }
+    .cv-year {
+      display: inline-block;
+      width: 3.5rem;
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    /* ── BREADCRUMB ─────────────────────────────────── */
+    .breadcrumb {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem var(--gutter) 0;
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .03em;
+    }
+    .breadcrumb a {
+      color: var(--muted);
+      transition: color .15s;
+    }
+    .breadcrumb a:hover {
+      color: var(--text);
+    }
+    .breadcrumb span {
+      margin: 0 .4rem;
+    }
+
+    /* ── SECTION TOGGLE (pills + titre) : défile avec la page ── */
+    .artist-works-headrow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 1.5rem;
+      margin-bottom: 1.75rem;
+      position: relative;
+      z-index: 100;
+      background: var(--white);
+      padding-bottom: 0.35rem;
+    }
+    .artist-works-headrow .section-title {
+      margin-bottom: 0;
+      flex: 0 1 auto;
+    }
+    .artist-page-section-nav {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+    .artist-section-pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 2px;
+    }
+    .artist-section-pills::-webkit-scrollbar {
+      display: none;
+    }
+    #artistPanelSections .exh-pill {
+      border-width: 0.5px;
+    }
+    #works {
+      scroll-margin-top: 7.5rem;
+    }
+    @media (min-width: 1025px) {
+      #works {
+        scroll-margin-top: 8rem;
+      }
+    }
+    .artist-tab-panels {
+      position: relative;
+      min-height: 12rem;
+      contain: layout style;
+    }
+    .artist-tab-panel[hidden] {
+      display: none !important;
+    }
+    .artist-tab-panel:focus {
+      outline: none;
+    }
+    /* ── BIO MODAL ───────────────────────────────────── */
+    .bio-modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 2rem);
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.38s ease,
+        background-color 0.38s ease,
+        visibility 0s linear 0.38s;
+    }
+    .bio-modal-overlay.open {
+      background: rgba(0, 0, 0, .52);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        opacity 0.38s ease,
+        background-color 0.38s ease,
+        visibility 0s linear 0s;
+    }
+    .bio-modal {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      /* Coins arrondis + overflow hidden = découpe la zone scroll (piste/pouce) */
+      border-radius: clamp(26px, 5vw, 40px);
+      overflow: hidden;
+      width: min(94vw, 620px);
+      max-width: 620px;
+      /* Hauteur min. liée à la largeur (~×1.34) + plancher en vh = carte clairement portrait */
+      min-height: min(
+        92vh,
+        max(68vh, calc(min(94vw, 620px) * 1.34))
+      );
+      max-height: min(92vh, 1100px);
+      border: none;
+      padding: 0;
+      color: var(--text);
+      box-sizing: border-box;
+      box-shadow:
+        0 32px 64px rgba(0, 0, 0, .14),
+        0 12px 24px rgba(0, 0, 0, .08),
+        0 0 0 1px rgba(0, 0, 0, .04);
+      transform: scale(0.94) translateY(18px);
+      opacity: 0;
+      transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease;
+    }
+    .bio-modal-scroll {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: clamp(2.25rem, 5vw, 3rem) clamp(2rem, 4.5vw, 2.75rem)
+        clamp(2.5rem, 5vw, 3.25rem);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    }
+    .bio-modal-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-track {
+      margin: clamp(8px, 1.5vw, 14px) 2px clamp(8px, 1.5vw, 14px) 0;
+      background: transparent;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.14);
+      border-radius: 999px;
+      border: 10px solid transparent;
+      border-left-width: 2px;
+      border-right-width: 2px;
+      background-clip: padding-box;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0.26);
+    }
+    .bio-modal-overlay.open .bio-modal {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bio-modal-overlay,
+      .bio-modal,
+      .work-lightbox-overlay,
+      .work-lightbox,
+      .work-lightbox-inner {
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .bio-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, .12);
+      background: rgba(255, 255, 255, .9);
+      color: rgba(0, 0, 0, .55);
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .bio-modal-close:hover {
+      color: rgba(0, 0, 0, .85);
+      border-color: rgba(0, 0, 0, .2);
+      background: var(--white);
+    }
+    .bio-modal-close:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+    .bio-modal-content {
+      font-size: 1rem;
+      line-height: 1.625;
+      padding-right: 0.25rem;
+    }
+    .bio-modal-header {
+      margin-bottom: 1.35rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-right: 2.5rem;
+    }
+    .bio-modal-name {
+      font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin: 0 0 0.45rem;
+      color: var(--text);
+    }
+    .bio-modal-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .bio-modal-content p + p {
+      margin-top: 1rem;
+    }
+    /* ── WORK LIGHTBOX (Selected Works) : icône agrandir (coins), pas curseur loupe ───────────────── */
+    #panel-works .work-card figure::after {
+      content: '';
+      position: absolute;
+      right: 0.5rem;
+      bottom: 0.5rem;
+      width: 2.125rem;
+      height: 2.125rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94)
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23111111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3'/%3E%3C/svg%3E")
+        center / 56% no-repeat;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+      opacity: 0;
+      transform: scale(0.94);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    #panel-works .work-card:hover figure::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .work-lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 2rem);
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.32s ease,
+        background-color 0.32s ease,
+        visibility 0s linear 0.32s;
+    }
+    .work-lightbox-overlay.open {
+      background: rgba(0, 0, 0, 0.72);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        opacity 0.32s ease,
+        background-color 0.32s ease,
+        visibility 0s linear 0s;
+    }
+    .work-lightbox {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: var(--white);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+      max-width: min(96vw, calc(100vw - 2rem));
+      max-height: min(92vh, 100%);
+      transform: scale(0.96);
+      opacity: 0;
+      transition:
+        transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.32s ease;
+    }
+    @media (min-width: 768px) {
+      .work-lightbox {
+        width: max-content;
+        max-width: min(96vw, calc(100vw - 2rem));
+      }
+    }
+    .work-lightbox-overlay.open .work-lightbox {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .work-lightbox-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-height: 0;
+      min-width: 0;
+      width: 100%;
+      max-height: min(92vh, 100%);
+    }
+    @media (min-width: 768px) {
+      .work-lightbox-inner {
+        flex-direction: row;
+        align-items: stretch;
+        width: max-content;
+        max-width: min(96vw, calc(100vw - 2rem));
+        max-height: min(92vh, 100%);
+      }
+    }
+    .work-lightbox-media {
+      flex: 0 0 auto;
+      min-width: 0;
+      min-height: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      position: relative;
+    }
+    /* View in room : superposé exactement sur la zone image, sans changer la taille de la modale */
+    .work-lightbox-room-wrap {
+      display: none;
+      position: absolute;
+      inset: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .work-lightbox-media.work-lightbox-media--room .work-lightbox-img {
+      visibility: hidden;
+    }
+    .work-lightbox-media.work-lightbox-media--room .work-lightbox-room-wrap {
+      display: block;
+    }
+    .work-lightbox-room {
+      position: absolute;
+      inset: 0;
+      background-color: #e8e2d8;
+      background-image: url("images/room-bg.png");
+      background-size: cover;
+      background-position: center 20%;
+    }
+    .work-lightbox-room-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .work-lightbox-img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: min(55vh, 85vw);
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    @media (min-width: 768px) {
+      .work-lightbox-img {
+        /* Taille intrinsèque jusqu’au plafond ; 40px = padding 20px × 2 sur .work-lightbox-media */
+        max-width: min(
+          calc(100vw - 2rem - 40px - min(340px, 34vw) - 48px),
+          calc(96vw - 40px - min(340px, 34vw))
+        );
+        max-height: min(85vh, calc(92vh - 48px));
+      }
+    }
+    .work-lightbox-overlay.is-landscape .work-lightbox-img {
+      max-height: min(78vh, calc(92vh - 48px));
+    }
+    .work-lightbox-overlay.is-portrait .work-lightbox-img {
+      max-height: min(82vh, calc(92vh - 48px));
+    }
+    @media (min-width: 768px) {
+      .work-lightbox-overlay.is-landscape .work-lightbox-img {
+        max-height: min(72vh, calc(92vh - 48px));
+      }
+      .work-lightbox-overlay.is-portrait .work-lightbox-img {
+        max-height: min(80vh, calc(92vh - 48px));
+      }
+    }
+    .work-lightbox-sidebar {
+      flex: 0 0 auto;
+      width: 100%;
+      max-height: 40vh;
+      overflow-y: auto;
+      padding: 1.35rem 1.5rem 1.5rem;
+      box-sizing: border-box;
+      border: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    @media (min-width: 768px) {
+      .work-lightbox-sidebar {
+        width: min(340px, 34vw);
+        max-height: min(92vh, 1200px);
+        padding: 1.5rem 1.35rem 1.5rem 1.5rem;
+      }
+    }
+    /* 13" et laptops : modale plus compacte (après les règles desktop pour prévaloir) */
+    @media (min-width: 768px) and (max-width: 1536px),
+      (min-width: 768px) and (max-height: 900px) {
+      .work-lightbox-overlay {
+        padding: clamp(0.65rem, 2.5vw, 1.25rem);
+      }
+      .work-lightbox {
+        max-width: min(94vw, calc(100vw - 1.25rem));
+        max-height: min(86vh, 100%);
+      }
+      .work-lightbox-inner {
+        max-width: min(94vw, calc(100vw - 1.25rem));
+        max-height: min(86vh, 100%);
+      }
+      .work-lightbox-img {
+        max-width: min(
+          calc(100vw - 1.25rem - 40px - min(280px, 28vw) - 36px),
+          calc(94vw - 40px - min(280px, 28vw))
+        );
+        max-height: min(68vh, calc(86vh - 44px));
+      }
+      .work-lightbox-overlay.is-landscape .work-lightbox-img {
+        max-height: min(64vh, calc(86vh - 44px));
+      }
+      .work-lightbox-overlay.is-portrait .work-lightbox-img {
+        max-height: min(70vh, calc(86vh - 44px));
+      }
+      .work-lightbox-sidebar {
+        width: min(280px, 28vw);
+        max-height: min(86vh, 100%);
+      }
+    }
+    .work-lightbox-artist {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: none;
+      color: var(--muted);
+      margin: 0;
+    }
+    .work-lightbox-title {
+      font-size: 1.15rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--text);
+      margin: 0;
+    }
+    .work-lightbox-title .work-card-date {
+      font-style: normal;
+      font-size: 0.92em;
+      color: var(--muted);
+    }
+    .work-lightbox-details {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .work-lightbox-details .work-card-detail-line {
+      display: block;
+      color: #999;
+    }
+    .work-lightbox-details .work-card-detail-line + .work-card-detail-line {
+      margin-top: 0.25rem;
+    }
+    a.btn-outline.work-lightbox-inquire {
+      margin-top: 0.35rem;
+      align-self: flex-start;
+      border-radius: 5px;
+      padding: 4px 1.5rem 5px;
+      font-size: 0.78rem;
+      min-height: unset;
+      line-height: 1.6;
+    }
+    .work-lightbox-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem 1rem;
+      margin-top: 1rem;
+      padding-top: 0.25rem;
+    }
+    .work-lightbox-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      margin: 0;
+      padding: 0.45rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      background: transparent;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .work-lightbox-action svg {
+      flex-shrink: 0;
+      opacity: 0.92;
+    }
+    .work-lightbox-action--room {
+      border: none;
+      color: var(--text);
+    }
+    .work-lightbox-action--room:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .work-lightbox-action--room:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+    .work-lightbox-action--share {
+      border: none;
+      padding-left: 0.35rem;
+      padding-right: 0.35rem;
+    }
+    .work-lightbox-action--share:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .work-lightbox-action--share:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+    .work-lightbox-share-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: stretch;
+    }
+    .work-lightbox-share-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 5;
+      min-width: 11.5rem;
+      margin: 0.35rem 0 0;
+      padding: 0.35rem 0;
+      list-style: none;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+    .work-lightbox-share-menu[hidden] {
+      display: none !important;
+    }
+    .work-lightbox-share-menu li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .work-lightbox-share-item {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0.5rem 1rem;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-align: left;
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.12s ease;
+    }
+    .work-lightbox-share-item:hover,
+    .work-lightbox-share-item:focus-visible {
+      background: rgba(0, 0, 0, 0.05);
+      outline: none;
+    }
+    .work-lightbox-close {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      z-index: 2;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.95);
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      box-shadow: none;
+    }
+    .work-lightbox-close:hover {
+      color: rgba(0, 0, 0, 0.85);
+      border-color: rgba(0, 0, 0, 0.2);
+      background: var(--white);
+    }
+    .work-lightbox-close:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ── MAIN CONTENT ──────────────────────────────────── -->
+  <main id="main" class="artist-detail-main">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="artists.html">Artists</a>
+      <span>/</span>
+      Gustave Caillebotte
+    </nav>
+
+    <!-- ── HERO: Portrait + Bio ────────────────────────── -->
+    <section class="artist-hero">
+      <div class="artist-hero-inner">
+        <img
+          src="images/Pieces/Gustave_Caillebotte_-_Un_balcon%2C_Boulevard_Haussmann.jpg"
+          alt="Un balcon, boulevard Haussmann, painting by Gustave Caillebotte"
+          class="artist-portrait"
+          loading="eager"
+        />
+        <div class="artist-info">
+          <h1>Gustave Caillebotte</h1>
+          <p class="artist-meta">Born 1848, Paris, France — Died 1894, Gennevilliers, France</p>
+        <div class="artist-bio" id="bio">
+          <p>Gustave Caillebotte painted the modern life of Paris, often from strikingly elevated or cropped viewpoints.</p>
+          <p>His city scenes, interiors and portraits combine close observation with an unusual sense of space and perspective.</p>
+          <p>He also helped sustain the Impressionist group as an exhibition organiser, collector and supporter of fellow artists.</p>
+        </div>
+          <div id="bioExtended" class="bio-extended-source" hidden aria-hidden="true">
+            <p>Born in Paris in 1848, Caillebotte studied law before turning to painting. He joined the Impressionists in the 1870s and took an active role in organising their exhibitions.</p>
+            <p>Parisian streets and the new buildings of Haussmann's city became recurring subjects. Views from windows and balconies allowed him to explore steep perspectives and the changing experience of urban life.</p>
+            <p>Alongside his painting, Caillebotte collected works by his contemporaries and supported their careers. His bequest later brought an important collection of Impressionist paintings into French public ownership.</p>
+          </div>
+          <div class="artist-cta-row">
+            <a href="#bio" class="btn-outline">read full biography</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BIO MODAL (opened by "read full biography") ── -->
+    <div class="bio-modal-overlay" id="bioModalOverlay" role="presentation" aria-hidden="true">
+      <div class="bio-modal" role="dialog" aria-modal="true" aria-label="Artist biography">
+        <button type="button" class="bio-modal-close" id="bioModalClose" aria-label="Close biography">&times;</button>
+        <div class="bio-modal-scroll">
+          <div class="bio-modal-content" id="bioModalContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox image (Selected Works) -->
+    <div class="work-lightbox-overlay" id="workLightboxOverlay" role="presentation" aria-hidden="true">
+      <div class="work-lightbox" role="dialog" aria-modal="true" aria-labelledby="workLightboxTitle" aria-label="Artwork details">
+        <button type="button" class="work-lightbox-close" id="workLightboxClose" aria-label="Close">&times;</button>
+        <div class="work-lightbox-inner">
+          <div class="work-lightbox-media" id="workLightboxMedia">
+            <img src="" alt="" class="work-lightbox-img" id="workLightboxImg" width="800" height="1000" decoding="async" />
+            <div class="work-lightbox-room-wrap" id="workLightboxRoomWrap" aria-hidden="true">
+              <div class="work-lightbox-room">
+                <img src="" alt="" class="work-lightbox-room-art" id="workLightboxRoomArt" decoding="async" />
+              </div>
+            </div>
+          </div>
+          <aside class="work-lightbox-sidebar">
+            <p class="work-lightbox-artist" id="workLightboxArtist"></p>
+            <h3 class="work-lightbox-title" id="workLightboxTitle"></h3>
+            <div class="work-lightbox-details" id="workLightboxDetails"></div>
+            <a class="btn-outline work-lightbox-inquire" id="workLightboxInquire" href="mailto:inquiry@galerie.com">Inquire</a>
+            <div class="work-lightbox-actions">
+              <button
+                type="button"
+                class="work-lightbox-action work-lightbox-action--room"
+                id="workLightboxViewRoom"
+                aria-label="View in room"
+                aria-pressed="false"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                <span>View in room</span>
+              </button>
+              <div class="work-lightbox-share-wrap">
+                <button
+                  type="button"
+                  class="work-lightbox-action work-lightbox-action--share"
+                  id="workLightboxShare"
+                  aria-label="Share artwork"
+                  aria-expanded="false"
+                  aria-haspopup="true"
+                  aria-controls="workLightboxShareMenu"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                    <polyline points="16 6 12 2 8 6" />
+                    <line x1="12" y1="2" x2="12" y2="15" />
+                  </svg>
+                  <span>Share</span>
+                </button>
+                <ul class="work-lightbox-share-menu" id="workLightboxShareMenu" role="menu" hidden aria-label="Partager sur">
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="facebook">Facebook</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="x">X</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="pinterest">Pinterest</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="linkedin">LinkedIn</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="whatsapp">WhatsApp</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="email">E-mail</button>
+                  </li>
+                  <li role="none">
+                    <button type="button" class="work-lightbox-share-item" role="menuitem" data-share="copy">Copier le lien</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SELECTED WORKS ──────────────────────────────── -->
+    <section class="artist-works" id="works">
+      <div class="artist-works-headrow" id="artistWorksHeadrow">
+        <h2 class="section-title" id="artistSectionHeading">Selected Works</h2>
+        <nav class="artist-page-section-nav" aria-label="Sections de la page">
+          <div class="artist-section-pills" id="artistPanelSections" role="tablist">
+            <button type="button" class="exh-pill active" role="tab" id="tab-works" aria-selected="true" aria-controls="panel-works" data-section="works" data-heading="Selected Works">Selected Works</button>
+            <button type="button" class="exh-pill" role="tab" id="tab-exhibitions" aria-selected="false" aria-controls="panel-exhibitions" data-section="exhibitions" data-heading="Exhibitions">Exhibitions</button>
+            <button type="button" class="exh-pill" role="tab" id="tab-news" aria-selected="false" aria-controls="panel-news" data-section="news" data-heading="News">News</button>
+            <button type="button" class="exh-pill" role="tab" id="tab-press" aria-selected="false" aria-controls="panel-press" data-section="press" data-heading="Press">Press</button>
+            <button type="button" class="exh-pill" role="tab" id="tab-biography" aria-selected="false" aria-controls="panel-biography" data-section="biography" data-heading="Biography">Biography</button>
+          </div>
+        </nav>
+      </div>
+
+      <div class="artist-tab-panels">
+        <div id="panel-works" class="artist-tab-panel" role="tabpanel" aria-labelledby="tab-works" data-panel="works">
+          <div class="works-grid">
+
+        <a href="#" class="work-card">
+          <figure><img src="images/Pieces/Gustave_Caillebotte_-_Rue_Hale%CC%81vy%2C_vue_d'un_sixie%CC%80me_e%CC%81tage.jpg" alt="Rue Halévy, vue d’un sixième étage, 1878" width="1280" height="1044" loading="eager" decoding="async" /></figure>
+          <div class="work-card-body"><p class="work-card-artist">Gustave Caillebotte</p><p class="work-card-title">Rue Halévy, vue d’un sixième étage, <span class="work-card-date">1878</span></p><p class="work-card-detail">Oil on canvas</p></div>
+        </a>
+        <a href="#" class="work-card">
+          <figure><img src="images/Pieces/Gustave_Caillebotte_-_Un_balcon%2C_Boulevard_Haussmann.jpg" alt="Un balcon, boulevard Haussmann, circa 1880" width="2224" height="3200" loading="eager" decoding="async" /></figure>
+          <div class="work-card-body"><p class="work-card-artist">Gustave Caillebotte</p><p class="work-card-title">Un balcon, boulevard Haussmann, <span class="work-card-date">c. 1880</span></p><p class="work-card-detail">Oil on canvas</p></div>
+        </a>
+
+          </div>
+        </div>
+
+        <div id="panel-exhibitions" class="artist-tab-panel" role="tabpanel" aria-labelledby="tab-exhibitions" data-panel="exhibitions" hidden>
+          <div class="works-grid"><p>No entries available.</p></div>
+        </div>
+
+        <div id="panel-news" class="artist-tab-panel" role="tabpanel" aria-labelledby="tab-news" data-panel="news" hidden>
+          <div class="works-grid"><p>No entries available.</p></div>
+        </div>
+
+        <div id="panel-press" class="artist-tab-panel" role="tabpanel" aria-labelledby="tab-press" data-panel="press" hidden>
+          <div class="works-grid"><p>No entries available.</p></div>
+        </div>
+
+        <div id="panel-biography" class="artist-tab-panel artist-tab-panel--cv" role="tabpanel" aria-labelledby="tab-biography" data-panel="biography" hidden>
+          <div class="works-grid"><p>Born in Paris in 1848, Gustave Caillebotte became a painter of modern urban life and a key participant in the Impressionist exhibitions.</p><p>His bold perspectives gave Parisian streets, balconies and interiors a distinctive visual energy.</p><p>As a collector and patron, he also played an important part in preserving and promoting the work of his fellow Impressionists.</p></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <p class="footer-brand">Galerie</p>
+
+      <nav class="footer-social" aria-label="Follow us">
+        <a href="#" title="Facebook" aria-label="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.884v2.27h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </a>
+        <a href="#" title="Instagram" aria-label="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+        <a href="#" title="Artsy" aria-label="Artsy">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm.75 17.5h-1.5v-6h-1.5V10h3v7.5zm-.75-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </a>
+        <a href="#" title="X" aria-label="X (Twitter)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </nav>
+
+      <nav class="footer-links" aria-label="Footer">
+        <a href="library.html">Library</a>
+        <a href="#">The Gallery</a>
+        <a href="#">Jobs</a>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+        <span class="footer-copy">&copy; 2026</span>
+      </nav>
+
+    </div>
+  </footer>
+
+  <!-- ── SCRIPTS ───────────────────────────────────────── -->
+  <script>
+    /* Mobile nav */
+    const toggle = document.querySelector('.menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    toggle?.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      mobileNav.setAttribute('aria-hidden', String(!open));
+    });
+  </script>
+  <script>
+    (function () {
+      var header = document.querySelector('.site-header');
+      if (!header) return;
+      var scrollDownThreshold = 40;
+      var scrollUpThreshold = 12;
+      var scrolledState = false;
+      var ticking = false;
+      function apply() {
+        ticking = false;
+        var y = window.scrollY;
+        if (!scrolledState && y > scrollDownThreshold) scrolledState = true;
+        else if (scrolledState && y < scrollUpThreshold) scrolledState = false;
+        header.classList.toggle('scrolled', scrolledState);
+        document.body.classList.toggle('header-scrolled', scrolledState);
+      }
+      function onScroll() {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(apply);
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      apply();
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.header-search-clear').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var form = btn.closest('.header-search');
+        var input = form && form.querySelector('input[type="search"]');
+        if (input) {
+          input.value = '';
+          input.focus();
+          form.classList.remove('has-value');
+        }
+      });
+    });
+    document.querySelectorAll('.header-search input[type="search"]').forEach(function (input) {
+      var form = input.closest('.header-search');
+      function updateHasValue() {
+        form.classList.toggle('has-value', input.value.length > 0);
+      }
+      input.addEventListener('input', updateHasValue);
+      input.addEventListener('focus', updateHasValue);
+      updateHasValue();
+    });
+  </script>
+
+  <script>
+    (function () {
+      var overlay = document.getElementById('bioModalOverlay');
+      var closeBtn = document.getElementById('bioModalClose');
+      var content = document.getElementById('bioModalContent');
+      var bio = document.getElementById('bio');
+      var bioExtended = document.getElementById('bioExtended');
+      var bioLink =
+        document.querySelector('main .artist-cta-row a.btn-outline[href="#bio"]') ||
+        document.querySelector('a[href="#bio"]');
+      var artistInfo = document.querySelector('main .artist-info');
+      var artistNameEl = artistInfo && artistInfo.querySelector('h1');
+      var artistMetaEl = artistInfo && artistInfo.querySelector('.artist-meta');
+      var dialogPanel = overlay && overlay.querySelector('.bio-modal');
+
+      if (!overlay || !closeBtn || !content || !bio || !bioLink) return;
+
+      function syncHashBio() {
+        var base = window.location.pathname + window.location.search;
+        if (window.location.hash !== '#bio') {
+          history.replaceState(null, '', base + '#bio');
+        }
+      }
+
+      function openModal() {
+        content.replaceChildren();
+        if (artistNameEl || artistMetaEl) {
+          var header = document.createElement('div');
+          header.className = 'bio-modal-header';
+          if (artistNameEl) {
+            var title = document.createElement('h2');
+            title.className = 'bio-modal-name';
+            title.textContent = artistNameEl.textContent.trim();
+            header.appendChild(title);
+          }
+          if (artistMetaEl) {
+            var meta = document.createElement('p');
+            meta.className = 'bio-modal-meta';
+            meta.textContent = artistMetaEl.textContent.trim();
+            header.appendChild(meta);
+          }
+          content.appendChild(header);
+        }
+        content.insertAdjacentHTML('beforeend', bio.innerHTML);
+        if (bioExtended) {
+          content.insertAdjacentHTML('beforeend', bioExtended.innerHTML);
+        }
+        if (dialogPanel && artistNameEl) {
+          dialogPanel.setAttribute(
+            'aria-label',
+            artistNameEl.textContent.trim() + ' — biography'
+          );
+        } else if (dialogPanel) {
+          dialogPanel.setAttribute('aria-label', 'Artist biography');
+        }
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        window.setTimeout(function () {
+          closeBtn.focus();
+        }, 50);
+      }
+
+      function closeModal() {
+        if (window.location.hash === '#bio') {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      bioLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        // Ouverture directe : si le hash est déjà #bio, hashchange ne se déclenche pas
+        openModal();
+        syncHashBio();
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Robustesse : si le hash passe à #bio (clic ou navigation), on ouvre le modal.
+      window.addEventListener('hashchange', function () {
+        if (window.location.hash === '#bio') openModal();
+      });
+
+      // Cas "au chargement" : si la page est ouverte directement en #bio.
+      if (window.location.hash === '#bio') openModal();
+    })();
+  </script>
+  <script>
+    (function () {
+      var nav = document.querySelector('.artist-page-section-nav');
+      if (!nav) return;
+      var buttons = nav.querySelectorAll('.exh-pill[data-section]');
+      var heading = document.getElementById('artistSectionHeading');
+
+      function showPanel(id) {
+        buttons.forEach(function (btn) {
+          var on = btn.getAttribute('data-section') === id;
+          btn.classList.toggle('active', on);
+          btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+          btn.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        document.querySelectorAll('.artist-tab-panel[data-panel]').forEach(function (panel) {
+          var match = panel.getAttribute('data-panel') === id;
+          if (match) {
+            panel.removeAttribute('hidden');
+          } else {
+            panel.setAttribute('hidden', '');
+          }
+        });
+        var activeBtn = nav.querySelector('.exh-pill[data-section="' + id + '"]');
+        if (heading && activeBtn && activeBtn.getAttribute('data-heading')) {
+          heading.textContent = activeBtn.getAttribute('data-heading');
+        }
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          showPanel(btn.getAttribute('data-section'));
+        });
+      });
+
+      showPanel('works');
+    })();
+  </script>
+  <script>
+    (function () {
+      var panel = document.getElementById('panel-works');
+      var overlay = document.getElementById('workLightboxOverlay');
+      var imgEl = document.getElementById('workLightboxImg');
+      var closeBtn = document.getElementById('workLightboxClose');
+      var artistEl = document.getElementById('workLightboxArtist');
+      var titleEl = document.getElementById('workLightboxTitle');
+      var detailsEl = document.getElementById('workLightboxDetails');
+      var inquireEl = document.getElementById('workLightboxInquire');
+      var mediaEl = document.getElementById('workLightboxMedia');
+      var roomWrap = document.getElementById('workLightboxRoomWrap');
+      var roomArt = document.getElementById('workLightboxRoomArt');
+      if (!panel || !overlay || !imgEl || !closeBtn) return;
+
+      var lastFocus = null;
+      var roomMode = false;
+
+      function setRoomMode(on) {
+        roomMode = !!on;
+        if (mediaEl) {
+          mediaEl.classList.toggle('work-lightbox-media--room', roomMode);
+        }
+        if (roomWrap) {
+          roomWrap.setAttribute('aria-hidden', roomMode ? 'false' : 'true');
+        }
+        var vr = document.getElementById('workLightboxViewRoom');
+        if (vr) {
+          vr.setAttribute('aria-pressed', roomMode ? 'true' : 'false');
+          var vrSpan = vr.querySelector('span');
+          if (vrSpan) vrSpan.textContent = roomMode ? 'Artwork only' : 'View in room';
+          vr.setAttribute('aria-label', roomMode ? 'Show artwork only' : 'View in room');
+        }
+        if (roomMode && imgEl && roomArt) {
+          /* Toujours utiliser la résolution réelle du navigateur (getAttribute peut être vide) */
+          var artUrl = imgEl.currentSrc || imgEl.src;
+          if (!artUrl) {
+            var attr = imgEl.getAttribute('src');
+            if (attr) {
+              try {
+                artUrl = new URL(attr, window.location.href).href;
+              } catch (err) {
+                artUrl = attr;
+              }
+            }
+          }
+          if (artUrl) {
+            roomArt.src = 'images/artist-page/View-in-room.png';
+            roomArt.alt = imgEl.alt ? imgEl.alt + ', in a room setting' : 'Artwork in a room setting';
+          }
+        } else if (!roomMode && roomArt) {
+          roomArt.removeAttribute('src');
+          roomArt.alt = '';
+        }
+      }
+
+      function syncLightboxOrientation() {
+        var w = imgEl.naturalWidth;
+        var h = imgEl.naturalHeight;
+        overlay.classList.remove('is-landscape', 'is-portrait');
+        if (w > 0 && h > 0) {
+          if (w > h) {
+            overlay.classList.add('is-landscape');
+          } else {
+            overlay.classList.add('is-portrait');
+          }
+        }
+      }
+
+      function openLightbox(card) {
+        var thumb = card.querySelector('figure img');
+        if (!thumb) return;
+        var src = thumb.getAttribute('src');
+        var alt = thumb.getAttribute('alt') || '';
+        if (!src) return;
+        setRoomMode(false);
+        lastFocus = document.activeElement;
+        overlay.classList.remove('is-landscape', 'is-portrait');
+        var a = card.querySelector('.work-card-artist');
+        var t = card.querySelector('.work-card-title');
+        var d = card.querySelector('.work-card-detail');
+        if (artistEl) artistEl.textContent = a ? a.textContent.trim() : '';
+        if (titleEl) titleEl.innerHTML = t ? t.innerHTML : '';
+        if (detailsEl) detailsEl.innerHTML = d ? d.innerHTML : '';
+        if (inquireEl) {
+          inquireEl.setAttribute('href', 'mailto:inquiry@galerie.com?subject=' + encodeURIComponent('Inquire — ' + alt));
+        }
+        imgEl.onload = function () {
+          syncLightboxOrientation();
+        };
+        imgEl.src = src;
+        imgEl.alt = alt;
+        if (imgEl.complete && imgEl.naturalWidth) {
+          syncLightboxOrientation();
+        }
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        closeShareMenu();
+        setRoomMode(false);
+        if (!overlay.classList.contains('open')) return;
+        overlay.classList.remove('open');
+        overlay.classList.remove('is-landscape', 'is-portrait');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        imgEl.onload = null;
+        imgEl.removeAttribute('src');
+        imgEl.alt = '';
+        if (artistEl) artistEl.textContent = '';
+        if (titleEl) titleEl.innerHTML = '';
+        if (detailsEl) detailsEl.innerHTML = '';
+        if (inquireEl) inquireEl.setAttribute('href', 'mailto:inquiry@galerie.com');
+        if (lastFocus && typeof lastFocus.focus === 'function') {
+          lastFocus.focus();
+        }
+        lastFocus = null;
+      }
+
+      panel.querySelectorAll('.work-card').forEach(function (card) {
+        card.setAttribute('aria-label', 'Open artwork in full view');
+        card.addEventListener('click', function (e) {
+          e.preventDefault();
+          openLightbox(card);
+        });
+      });
+
+      closeBtn.addEventListener('click', closeLightbox);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeLightbox();
+      });
+
+      var shareBtn = document.getElementById('workLightboxShare');
+      var shareMenu = document.getElementById('workLightboxShareMenu');
+      var shareWrap = shareBtn ? shareBtn.closest('.work-lightbox-share-wrap') : null;
+      var outsideShareClickHandler = null;
+
+      function getShareContext() {
+        var title = titleEl && titleEl.textContent ? titleEl.textContent.trim() : 'Œuvre';
+        var url = window.location.href;
+        var imageSrc = imgEl && imgEl.getAttribute('src') ? imgEl.getAttribute('src') : '';
+        var imageUrl = '';
+        try {
+          imageUrl = imageSrc ? new URL(imageSrc, window.location.href).href : '';
+        } catch (err) {
+          imageUrl = '';
+        }
+        return { title: title, url: url, imageUrl: imageUrl };
+      }
+
+      function closeShareMenu() {
+        if (!shareMenu || !shareBtn) return;
+        shareMenu.hidden = true;
+        shareBtn.setAttribute('aria-expanded', 'false');
+        if (outsideShareClickHandler) {
+          document.removeEventListener('click', outsideShareClickHandler);
+          outsideShareClickHandler = null;
+        }
+      }
+
+      function openShareMenu() {
+        if (!shareMenu || !shareBtn) return;
+        shareMenu.hidden = false;
+        shareBtn.setAttribute('aria-expanded', 'true');
+        if (outsideShareClickHandler) {
+          document.removeEventListener('click', outsideShareClickHandler);
+        }
+        outsideShareClickHandler = function (ev) {
+          if (shareWrap && !shareWrap.contains(ev.target)) {
+            closeShareMenu();
+          }
+        };
+        setTimeout(function () {
+          document.addEventListener('click', outsideShareClickHandler);
+        }, 0);
+      }
+
+      function toggleShareMenu() {
+        if (!shareMenu) return;
+        if (shareMenu.hidden) {
+          openShareMenu();
+        } else {
+          closeShareMenu();
+        }
+      }
+
+      function runShare(kind) {
+        var ctx = getShareContext();
+        var u = encodeURIComponent(ctx.url);
+        var t = encodeURIComponent(ctx.title);
+        var img = encodeURIComponent(ctx.imageUrl || '');
+        var href = '';
+        switch (kind) {
+          case 'facebook':
+            href = 'https://www.facebook.com/sharer/sharer.php?u=' + u;
+            break;
+          case 'x':
+            href = 'https://twitter.com/intent/tweet?url=' + u + '&text=' + t;
+            break;
+          case 'pinterest':
+            href =
+              'https://www.pinterest.com/pin/create/button/?url=' +
+              u +
+              '&description=' +
+              t +
+              (ctx.imageUrl ? '&media=' + img : '');
+            break;
+          case 'linkedin':
+            href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + u;
+            break;
+          case 'whatsapp':
+            href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(ctx.title + ' — ' + ctx.url);
+            break;
+          case 'email':
+            href =
+              'mailto:?subject=' + t + '&body=' + encodeURIComponent(ctx.title + '\n\n' + ctx.url);
+            window.location.href = href;
+            return;
+          case 'copy':
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(ctx.url).catch(function () {});
+            }
+            return;
+          default:
+            return;
+        }
+        if (href) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+        }
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) {
+          if (shareMenu && !shareMenu.hidden) {
+            e.preventDefault();
+            closeShareMenu();
+            return;
+          }
+          e.preventDefault();
+          closeLightbox();
+        }
+      });
+
+      var viewRoomBtn = document.getElementById('workLightboxViewRoom');
+      if (viewRoomBtn) {
+        viewRoomBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          setRoomMode(!roomMode);
+        });
+      }
+      if (shareBtn && shareMenu) {
+        shareBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          toggleShareMenu();
+        });
+        shareMenu.addEventListener('click', function (e) {
+          var item = e.target.closest('[data-share]');
+          if (!item || !shareMenu.contains(item)) return;
+          e.stopPropagation();
+          runShare(item.getAttribute('data-share'));
+          closeShareMenu();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

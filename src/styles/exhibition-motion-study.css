@@ -1,0 +1,95 @@
+/* Group show interaction study — resting look of the cards; every pose is written by GSAP. */
+.gm-lab { max-width: 1180px; }
+.gm-lab .artist-bio-lab__stage { position: relative; display: block; min-height: 620px; padding: 0; }
+.gm-lab__viewport {
+  position: absolute;
+  top: calc(50% - 45px);
+  left: 50%;
+  width: 1100px;
+  height: 700px;
+  translate: -50% -50%;
+  scale: var(--gm-fit, 1);
+}
+.gm-lab__scene { position: absolute; inset: 0; border-radius: 12px; outline: none; touch-action: none; user-select: none; }
+.gm-lab__scene:focus-visible { outline: 2px solid #8c877d; outline-offset: 4px; }
+.gm-lab__status { position: absolute; top: 8px; left: 12px; color: var(--lib-muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.gm-lab__stack-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 200;
+  color: var(--lib-ink);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.gm-lab__stack-label span { margin-left: 3px; color: var(--lib-muted); font-size: 9px; vertical-align: super; }
+
+.gm-card { position: absolute; top: 50%; left: 50%; cursor: pointer; }
+.gm-lab[data-variant="paquet"] .gm-card,
+.gm-lab[data-variant="table"] .gm-card { cursor: grab; }
+.gm-lab[data-variant="table"] .gm-card:active { cursor: grabbing; }
+.gm-card__inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: translate .28s cubic-bezier(.2, .8, .2, 1), rotate .28s cubic-bezier(.2, .8, .2, 1); }
+.gm-card__face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(60, 60, 60, .018), 0 14px 30px -16px rgba(60, 60, 60, .055);
+  backface-visibility: hidden;
+  transition: box-shadow .3s ease;
+}
+.gm-card:hover .gm-card__face { box-shadow: 0 1px 3px rgba(60, 60, 60, .025), 0 18px 36px -18px rgba(60, 60, 60, .08); }
+
+.gm-card--image { --gm-caption-h: 58px; width: var(--img-w); height: var(--img-h); }
+.gm-card--image[data-orientation="portrait"] { --gm-caption-h: 70px; }
+.gm-card--image .gm-card__face--front { padding: 0; }
+.gm-card--image img { display: block; width: var(--img-w); height: var(--img-h); object-fit: cover; pointer-events: none; }
+.gm-card__caption { display: none; }
+.gm-card--image.is-expanded .gm-card__face--front { overflow: visible; }
+.gm-card--image.is-expanded .gm-card__caption { display: flex; flex-direction: column; gap: 2px; position: absolute; top: 100%; left: 0; width: 100%; margin: 0; padding-top: 10px; color: var(--lib-muted); font-size: 8px; line-height: 1.25; }
+.gm-card__caption span:first-child { font-style: italic; }
+.gm-card__face--back {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f4f3ee;
+  font-size: 11px;
+  line-height: 1.4;
+  transform: rotateY(180deg);
+}
+.gm-card__number { font-size: 44px; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.gm-card__muted { color: var(--lib-muted); }
+
+.gm-card--text { width: 210px; height: 260px; }
+.gm-card--text .gm-card__face { display: flex; flex-direction: column; gap: 14px; padding: 16px; font-size: 12px; line-height: 1.4; }
+.gm-card--text:not(.gm-card--title) .gm-card__face--front { border: .5px solid #e2e2de; }
+.gm-card__kicker { color: var(--lib-muted); font-size: 10px; }
+.gm-card__credit { margin-top: auto; color: var(--lib-muted); font-size: 10px; }
+.gm-card--title .gm-card__face { background: #111; color: #fff; }
+.gm-card--title .gm-card__kicker,
+.gm-card--title .gm-card__credit { color: #9a9a94; }
+.gm-card--title h3 { font-size: 28px; font-weight: 400; line-height: 1; letter-spacing: -.02em; }
+.gm-card--artists ul { margin: 0; padding: 0; list-style: none; line-height: 1.5; }
+.gm-card--quote blockquote { margin: 0; font-size: 20px; line-height: 1.48; letter-spacing: -.01em; }
+.gm-card--quote blockquote::before { content: "“"; }
+.gm-card__quote-ending { white-space: nowrap; }
+.gm-card--quote blockquote::before,
+.gm-card__quote-close { color: #000; font-family: Georgia, serif; font-size: 1.4em; line-height: 0; vertical-align: -.08em; }
+
+.gm-card.is-hover-deck .gm-card__inner {
+  will-change: translate, rotate;
+}
+.gm-card.is-hover-deck[data-stack-index="0"] .gm-card__inner { translate: 0 -6px; }
+.gm-card.is-hover-deck[data-stack-index="1"] .gm-card__inner { translate: -8px -3px; rotate: -1.8deg; }
+.gm-card.is-hover-deck[data-stack-index="2"] .gm-card__inner { translate: 8px -2px; rotate: 1.8deg; }
+.gm-card.is-hover-deck[data-stack-index="3"] .gm-card__inner { translate: -13px 2px; rotate: -3deg; }
+.gm-card.is-hover-deck[data-stack-index="4"] .gm-card__inner { translate: 13px 4px; rotate: 3deg; }
+.gm-card.is-hover-deck[data-stack-index="5"] .gm-card__inner { translate: -18px 6px; rotate: -3.8deg; }
+.gm-card.is-hover-deck[data-stack-index="6"] .gm-card__inner { translate: 18px 8px; rotate: 3.8deg; }
+.gm-card.is-hover-deck[data-stack-index="7"] .gm-card__inner { translate: -22px 10px; rotate: -4.5deg; }
+.gm-card.is-hover-deck[data-stack-index="8"] .gm-card__inner { translate: 22px 12px; rotate: 4.5deg; }

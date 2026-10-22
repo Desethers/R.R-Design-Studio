@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exhibition text + modal – Library preview</title>
+  <style>
+    /* Library preview: standalone block, no site header/footer around it. */
+    #main { padding: 2.5rem 0; }
+    html { scrollbar-width: none; }
+    html::-webkit-scrollbar { display: none; }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Your friends — Sacha Elron. Current exhibition at Galerie, Paris." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    /* Page exposition — une seule colonne (même largeur que header / grilles du site) */
+    .exh-page__column {
+      width: 100%;
+      max-width: var(--max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+      box-sizing: border-box;
+    }
+
+    .exh-page {
+      padding-bottom: 2rem;
+    }
+    .exh-page-breadcrumb {
+      padding-top: calc(var(--header-height, 4rem) + 0.75rem);
+      padding-bottom: 1rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .exh-page-breadcrumb a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .exh-page-breadcrumb a:hover { color: var(--black); }
+
+    /* Intro en premier : texte / méta, puis image héros */
+    .exh-page-intro {
+      border-top: none;
+      border-bottom: none;
+      padding-top: 1.25rem;
+      padding-bottom: 2.25rem;
+    }
+
+    .exh-page-hero {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    .exh-page-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .exh-page-hero__caption {
+      display: block;
+      margin: 0.65rem 0 0;
+      padding: 0;
+      font-size: 11px;
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: normal;
+      text-transform: none;
+      line-height: 1.45;
+      color: var(--muted);
+      max-width: 42rem;
+    }
+    .exh-page-hero__caption em {
+      font-style: italic;
+    }
+    .exh-page-split {
+      display: grid;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (min-width: 900px) {
+      .exh-page-split {
+        grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+        gap: 3.5rem;
+      }
+    }
+
+    .exh-page-title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--black);
+      margin: 0 0 1.25rem;
+    }
+    .exh-page-title em {
+      font-style: italic;
+      font-weight: inherit;
+    }
+
+    .exh-page-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .exh-page-aside-label {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.2rem;
+    }
+    .exh-page-aside p { margin: 0; }
+    .exh-page-aside a.artist-link {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: var(--black);
+    }
+    .exh-page-aside-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .exh-page-aside-actions--primary {
+      margin-top: 0.75rem;
+    }
+    .exh-page-intro .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 4px 1.2rem;
+      border: 1px solid var(--black);
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      background: var(--black);
+      color: var(--white);
+      transition: background 0.15s, color 0.15s;
+    }
+    .exh-page-intro .btn-primary:hover {
+      background: var(--white);
+      color: var(--black);
+    }
+    .exh-page-aside-actions .btn-primary,
+    .exh-page-aside-actions .btn-outline {
+      width: 100%;
+      max-width: 12.5rem;
+      box-sizing: border-box;
+      min-height: 36px;
+      padding: 4px 1.2rem;
+      font-size: 0.76rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    .exh-page-aside-back {
+      margin: 0.85rem 0 0;
+      font-size: 0.82rem;
+    }
+    .exh-page-aside-back a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .exh-page-aside-back a:hover {
+      color: var(--black);
+    }
+
+    .exh-page-main p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+    .exh-page-lede {
+      margin: 0 0 1.25rem;
+      max-width: 52ch;
+    }
+    .exh-page-body {
+      max-width: 52ch;
+    }
+    @media (min-width: 1025px) {
+      .exh-page-lede,
+      .exh-page-body {
+        max-width: 68ch;
+      }
+    }
+    .exh-page-body p {
+      margin: 0 0 1rem;
+    }
+
+    .exh-page-section {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    /* Œuvres : déroulé type page exposition (image + légende, sans sous-bloc commercial) */
+    .content-section.exh-exhibition-works {
+      padding: 0;
+      background: var(--white);
+    }
+
+    .exh-exhibition-statement {
+      padding-top: clamp(2.25rem, 4.5vw, 3.25rem);
+      padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+      text-align: center;
+    }
+    .exh-exhibition-statement__heading {
+      margin: 0 0 1rem;
+    }
+    .exh-exhibition-statement__lead {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0 auto 1.1rem;
+      max-width: 52ch;
+      text-wrap: balance;
+    }
+    .exh-exhibition-statement__cta {
+      margin: 0.35rem auto 0;
+      display: flex;
+      justify-content: center;
+    }
+    /* Modale texte d’exposition — même principe que la biographie (page artiste) */
+    .bio-modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 2rem);
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.38s ease,
+        background-color 0.38s ease,
+        visibility 0s linear 0.38s;
+    }
+    .bio-modal-overlay.open {
+      background: rgba(0, 0, 0, 0.52);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        opacity 0.38s ease,
+        background-color 0.38s ease,
+        visibility 0s linear 0s;
+    }
+    .bio-modal {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border-radius: clamp(26px, 5vw, 40px);
+      overflow: hidden;
+      width: min(94vw, 620px);
+      max-width: 620px;
+      min-height: min(
+        92vh,
+        max(68vh, calc(min(94vw, 620px) * 1.34))
+      );
+      max-height: min(92vh, 1100px);
+      border: none;
+      padding: 0;
+      color: var(--text);
+      box-sizing: border-box;
+      box-shadow:
+        0 32px 64px rgba(0, 0, 0, 0.14),
+        0 12px 24px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+      transform: scale(0.94) translateY(18px);
+      opacity: 0;
+      transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.4s ease;
+    }
+    .bio-modal-scroll {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: clamp(2.25rem, 5vw, 3rem) clamp(2rem, 4.5vw, 2.75rem)
+        clamp(2.5rem, 5vw, 3.25rem);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    }
+    .bio-modal-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-track {
+      margin: clamp(8px, 1.5vw, 14px) 2px clamp(8px, 1.5vw, 14px) 0;
+      background: transparent;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.14);
+      border-radius: 999px;
+      border: 10px solid transparent;
+      border-left-width: 2px;
+      border-right-width: 2px;
+      background-clip: padding-box;
+    }
+    .bio-modal-scroll::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0.26);
+    }
+    .bio-modal-overlay.open .bio-modal {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bio-modal-overlay,
+      .bio-modal {
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .bio-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.9);
+      color: rgba(0, 0, 0, 0.55);
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .bio-modal-close:hover {
+      color: rgba(0, 0, 0, 0.85);
+      border-color: rgba(0, 0, 0, 0.2);
+      background: var(--white);
+    }
+    .bio-modal-close:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+    .bio-modal-content {
+      font-size: 1rem;
+      line-height: 1.625;
+      padding-right: 0.25rem;
+    }
+    .bio-modal-header {
+      margin-bottom: 1.35rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      padding-right: 2.5rem;
+    }
+    .bio-modal-name {
+      font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin: 0 0 0.45rem;
+      color: var(--text);
+    }
+    .bio-modal-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin: 0;
+      line-height: 1.5;
+    }
+    .bio-modal-content p + p {
+      margin-top: 1rem;
+    }
+
+    /* Une seule rangée en 2 colonnes (05 + 06), puis œuvres pleine largeur */
+    .exh-works-grid--pair {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(2rem, 4vw, 2.75rem);
+      padding-bottom: clamp(0.5rem, 1.5vw, 1rem);
+    }
+    @media (min-width: 768px) {
+      .exh-works-grid--pair {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 1.5rem;
+        row-gap: 0;
+      }
+    }
+    @media (min-width: 1025px) {
+      .exh-works-grid--pair {
+        column-gap: 2rem;
+      }
+    }
+    .exh-works-grid--pair .exh-work {
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: var(--white);
+    }
+    .exh-work--pair-with-quote {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-self: stretch;
+      min-height: 0;
+    }
+    .exh-pair-quote {
+      margin: 0;
+      padding: 0 clamp(0.5rem, 2vw, 1rem);
+      max-width: min(100%, 22ch);
+      border: none;
+      text-align: center;
+      font-size: 1.76rem;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .exh-pair-quote p {
+      margin: 0;
+    }
+    .exh-pair-quote cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.72rem;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    /* Colonne citation (paire) : gris, tout noir au survol */
+    .exh-work--pair-with-quote .exh-pair-quote,
+    .exh-work--pair-with-quote .exh-pair-quote cite {
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .exh-work--pair-with-quote:hover .exh-pair-quote,
+    .exh-work--pair-with-quote:hover .exh-pair-quote cite {
+      color: var(--black);
+    }
+
+    /* Citation plein conteneur (au-dessus d’un bloc œuvres) */
+    .exh-work-full-quote {
+      margin: 0;
+      padding-top: clamp(2rem, 4vw, 3rem);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+      background: var(--white);
+      text-align: center;
+    }
+    .exh-work-full-quote__inner {
+      margin: 0 auto;
+      max-width: 100%;
+      border: none;
+      padding: 0;
+    }
+    .exh-work-full-quote__inner p {
+      margin: 0;
+      font-size: clamp(1.25rem, 5vw, 42px);
+      line-height: 1.3;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      text-wrap: balance;
+    }
+    .exh-work-full-quote__inner cite {
+      display: block;
+      margin-top: 1.25rem;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .exh-work--full {
+      margin: 0;
+      padding-top: clamp(2rem, 4vw, 3rem);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+      background: var(--white);
+    }
+    .exh-work__figure {
+      margin: 0;
+      padding: 0;
+      background: var(--white);
+    }
+    .exh-work__figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .exh-work__figure--stack > img + img {
+      margin-top: clamp(0.75rem, 2vw, 1.25rem);
+    }
+    /* Légende sous une vue d’installation (bloc stack, avant l’œuvre suivante) */
+    .exh-work__install-caption {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.45;
+      margin: clamp(0.5rem, 1.5vw, 0.75rem) 0 clamp(0.75rem, 2vw, 1.25rem);
+      max-width: 42rem;
+    }
+    .exh-work__figure figcaption {
+      margin-top: 1rem;
+      max-width: 42rem;
+      /* Légendes œuvres : corps unique 11px (aligné sur exh-work__figcaption--inquiry) */
+      --exh-caption-primary-size: 12px;
+    }
+    .exh-work__artist {
+      display: block;
+      font-size: var(--exh-caption-primary-size);
+      font-weight: 500;
+      color: var(--text);
+      margin: 0 0 0.15rem;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    /* Ligne sous l’artiste : titre, date — puis médium, dimensions */
+    .exh-work__title-line {
+      margin: 0 0 0.35rem;
+      font-size: var(--exh-caption-primary-size);
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+    }
+    .exh-work__title-line .exh-work__title {
+      display: inline;
+      margin: 0;
+      font-weight: 500;
+    }
+    .exh-work__title-sep {
+      font-weight: 400;
+    }
+    .exh-work__date {
+      display: inline;
+      font-size: inherit;
+      font-weight: 500;
+      color: var(--black);
+    }
+    .exh-work__medium,
+    .exh-work__dimensions {
+      display: block;
+      font-size: var(--exh-caption-primary-size);
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+    .exh-work__medium {
+      margin-bottom: 0.08rem;
+    }
+    /*
+      Bouton inquiry : positionné en haut à droite du figcaption (top: 0), indépendant du flux texte.
+      padding-right réserve la zone pour éviter le chevauchement avec artiste / titre longs.
+    */
+    .exh-work__figure figcaption.exh-work__figcaption--inquiry {
+      position: relative;
+      display: block;
+      padding-right: clamp(6.5rem, 30%, 9.5rem);
+      box-sizing: border-box;
+    }
+    .exh-work__figcaption--inquiry .exh-work__inquiry {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      z-index: 1;
+    }
+    .exh-work__figure .exh-work__figcaption--inquiry .exh-work__inquiry.btn-outline {
+      min-height: 0;
+      padding: 10px 50px;
+      border-radius: 2px;
+      border-color: rgba(255, 194, 194, 1);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+    }
+    .exh-work__figure .exh-work__figcaption--inquiry .exh-work__inquiry.btn-outline:hover {
+      background: transparent;
+      color: var(--black);
+      border-color: var(--black);
+    }
+
+    .exh-page-footer-cta {
+      padding-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .exh-page-footer-cta__link {
+      display: inline;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      text-decoration: none;
+      border: none;
+      background: none;
+      padding: 0;
+      min-height: 0;
+    }
+    .exh-page-footer-cta__link:hover {
+      color: var(--black);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .exh-page-footer-cta__link:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 3px;
+    }
+
+    /* Modale inquiry œuvre (mock formulaire) */
+    .inquiry-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 2rem);
+      background: rgba(0, 0, 0, 0);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.35s ease,
+        background-color 0.35s ease,
+        visibility 0s linear 0.35s;
+    }
+    .inquiry-modal-overlay.open {
+      background: rgba(0, 0, 0, 0.55);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition:
+        opacity 0.35s ease,
+        background-color 0.35s ease,
+        visibility 0s linear 0s;
+    }
+    .inquiry-modal {
+      position: relative;
+      width: min(94vw, 520px);
+      max-height: min(92vh, 720px);
+      overflow: auto;
+      background: var(--white);
+      color: var(--black);
+      padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.25rem);
+      box-sizing: border-box;
+      box-shadow:
+        0 28px 56px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+      transform: scale(0.96) translateY(12px);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+    }
+    .inquiry-modal-overlay.open .inquiry-modal {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .inquiry-modal-overlay,
+      .inquiry-modal {
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .inquiry-modal__close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin: 0;
+      padding: 0.25rem 0;
+      border: none;
+      background: none;
+      font: inherit;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .inquiry-modal__close span[aria-hidden="true"] {
+      font-size: 1.15rem;
+      font-weight: 300;
+      line-height: 1;
+      opacity: 0.75;
+    }
+    .inquiry-modal__close:hover {
+      color: var(--black);
+    }
+    .inquiry-modal__close:focus-visible {
+      outline: 2px solid var(--black);
+      outline-offset: 3px;
+    }
+    .inquiry-modal__title {
+      margin: 0 2.5rem 0.65rem 0;
+      font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      color: var(--black);
+    }
+    .inquiry-modal__lead {
+      margin: 0 0 1.75rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .inquiry-modal__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.1rem 1.25rem;
+    }
+    @media (min-width: 480px) {
+      .inquiry-modal__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .inquiry-line-field {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #d4d4d4;
+    }
+    .inquiry-line-field input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      padding: 0 0 0.1rem;
+      margin: 0;
+      background: transparent;
+      font: inherit;
+      font-size: 0.88rem;
+      color: var(--black);
+    }
+    .inquiry-line-field input::placeholder {
+      color: #8a8a8a;
+    }
+    .inquiry-line-field input:focus {
+      outline: none;
+    }
+    .inquiry-line-field:focus-within {
+      border-bottom-color: var(--black);
+    }
+    .inquiry-line-field__star {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      color: #8a8a8a;
+      line-height: 1;
+      padding-bottom: 0.15rem;
+    }
+    .inquiry-modal__textarea-wrap {
+      margin-top: 1.35rem;
+    }
+    .inquiry-modal__textarea-wrap textarea {
+      display: block;
+      width: 100%;
+      min-height: 7.5rem;
+      margin: 0;
+      padding: 0.65rem 0.75rem;
+      box-sizing: border-box;
+      border: 1px solid #d4d4d4;
+      border-radius: 2px;
+      font: inherit;
+      font-size: 0.88rem;
+      color: var(--black);
+      resize: vertical;
+    }
+    .inquiry-modal__textarea-wrap textarea::placeholder {
+      color: #8a8a8a;
+    }
+    .inquiry-modal__textarea-wrap textarea:focus {
+      outline: none;
+      border-color: #9ca3af;
+    }
+    .inquiry-modal__counter {
+      display: block;
+      margin-top: 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+      color: #9ca3af;
+    }
+    .inquiry-modal__actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+    }
+    .inquiry-modal__submit {
+      min-width: 7.5rem;
+      padding: 0.45rem 1.5rem;
+      border: 2px solid #3b6ea5;
+      border-radius: 5px;
+      background: #f0f4fa;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: #b0b8c4;
+      cursor: not-allowed;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .inquiry-modal__submit:not(:disabled) {
+      color: var(--black);
+      cursor: pointer;
+    }
+    .inquiry-modal__submit:not(:disabled):hover {
+      background: #e4ecf6;
+      border-color: #2d5a8a;
+    }
+  </style>
+</head>
+<body class="exh-page">
+  <main id="main">
+    <!-- Source data for the modal header: the script reads the exhibition title
+         and the Artist / Dates / Location rows to build it. -->
+    <div hidden aria-hidden="true">
+      <h1 id="exh-title" class="exh-page-title">Sacha Elron — <em>Your friends</em></h1>
+      <aside class="exh-page-aside" aria-label="Exhibition details">
+        <div>
+          <p class="exh-page-aside-label">Artist</p>
+          <p><a class="artist-link" href="artist-a1.html">Sacha Elron</a></p>
+        </div>
+        <div>
+          <p class="exh-page-aside-label">Dates</p>
+          <p>Feb 12 — Mar 22, 2026</p>
+        </div>
+        <div>
+          <p class="exh-page-aside-label">Location</p>
+          <p>Galerie, Paris — Turenne</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="content-section exh-page-section exh-exhibition-works" aria-label="Exhibition text">
+      <div class="exh-page__column exh-exhibition-statement">
+        <h2 class="section-title exh-exhibition-statement__heading">Exhibition text</h2>
+        <p class="exh-exhibition-statement__lead">
+          Presented as one continuous sequence, the works below extend the show’s themes—friendship, memory, and light—into individual canvases and works on paper, each conceived for this installation.
+        </p>
+        <div class="exh-exhibition-statement__cta">
+          <a href="#exhibition-text" class="btn-outline">read full exhibition text</a>
+        </div>
+        <div id="exhibitionTextSource" hidden aria-hidden="true">
+          <p>
+            The hanging follows the rhythm of the gallery: broader fields alternate with tighter formats, so the visit unfolds like a walk through connected rooms rather than a checklist of objects.
+            Color is held deliberately low, letting surface and edge carry the emotional register of the title <em>Your friends</em>.
+          </p>
+          <p>
+            Checklist, installation photography, and press requests are available from the gallery. For documentation and visiting hours, please refer to the venue details above or contact the front desk.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="bio-modal-overlay" id="exhibitionTextModalOverlay" role="presentation" aria-hidden="true">
+    <div class="bio-modal" role="dialog" aria-modal="true" aria-labelledby="exhibitionTextModalTitle">
+      <button type="button" class="bio-modal-close" id="exhibitionTextModalClose" aria-label="Close exhibition text">&times;</button>
+      <div class="bio-modal-scroll">
+        <div class="bio-modal-content" id="exhibitionTextModalContent"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var overlay = document.getElementById('exhibitionTextModalOverlay');
+      var closeBtn = document.getElementById('exhibitionTextModalClose');
+      var content = document.getElementById('exhibitionTextModalContent');
+      var source = document.getElementById('exhibitionTextSource');
+      var link = document.querySelector('.exh-exhibition-statement__cta a[href="#exhibition-text"]');
+      var titleEl = document.getElementById('exh-title');
+      var dialogPanel = overlay && overlay.querySelector('.bio-modal');
+
+      if (!overlay || !closeBtn || !content || !source || !link) return;
+
+      function exhibitionMeta() {
+        var parts = [];
+        var aside = document.querySelector('.exh-page-aside');
+        if (!aside) return '';
+        aside.querySelectorAll(':scope > div').forEach(function (block) {
+          var label = block.querySelector('.exh-page-aside-label');
+          var val = block.querySelector('a, p:not(.exh-page-aside-label)');
+          if (label && val && /Artist|Venue|Dates|Location/.test(label.textContent.trim())) {
+            parts.push(val.textContent.trim());
+          }
+        });
+        return parts.join(' · ');
+      }
+
+      function openModal() {
+        content.replaceChildren();
+        if (titleEl) {
+          var header = document.createElement('div');
+          header.className = 'bio-modal-header';
+          var title = document.createElement('h2');
+          title.className = 'bio-modal-name';
+          title.id = 'exhibitionTextModalTitle';
+          title.textContent = titleEl.textContent.trim();
+          header.appendChild(title);
+          var meta = exhibitionMeta();
+          if (meta) {
+            var metaP = document.createElement('p');
+            metaP.className = 'bio-modal-meta';
+            metaP.textContent = meta;
+            header.appendChild(metaP);
+          }
+          content.appendChild(header);
+        }
+        content.insertAdjacentHTML('beforeend', source.innerHTML);
+        if (dialogPanel && titleEl) {
+          dialogPanel.setAttribute('aria-label', titleEl.textContent.trim() + ' — exhibition text');
+        } else if (dialogPanel) {
+          dialogPanel.setAttribute('aria-label', 'Exhibition text');
+        }
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        window.setTimeout(function () {
+          closeBtn.focus();
+        }, 50);
+      }
+
+      function closeModal() {
+        if (window.location.hash === '#exhibition-text') {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      function syncHash() {
+        var base = window.location.pathname + window.location.search;
+        if (window.location.hash !== '#exhibition-text') {
+          history.replaceState(null, '', base + '#exhibition-text');
+        }
+      }
+
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+        syncHash();
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+      });
+
+      window.addEventListener('hashchange', function () {
+        if (window.location.hash === '#exhibition-text') openModal();
+      });
+
+      if (window.location.hash === '#exhibition-text') openModal();
+    })();
+  </script>
+</body>
+</html>

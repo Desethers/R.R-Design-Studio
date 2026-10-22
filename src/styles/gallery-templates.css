@@ -1,0 +1,91 @@
+/* Gallery templates directory — the studio's redesigns of gallery websites, as a catalogue. */
+.section-templates {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  color: var(--lib-ink);
+  font-size: 13px;
+}
+.section-templates__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--lib-line);
+}
+.section-templates__kicker { color: var(--lib-muted); font-size: 11px; }
+.section-templates__head h2 { margin-top: 10px; font-size: clamp(30px, 4.2cqi, 48px); font-weight: 400; line-height: 1; letter-spacing: -.02em; }
+.section-templates__intro { max-width: 42ch; color: var(--lib-muted); font-size: 12px; line-height: 1.5; }
+.section-templates__count { padding: 14px 0 32px; color: var(--lib-muted); font-size: 12px; }
+.section-templates__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tpl-card { position: relative; display: flex; flex-direction: column; gap: 14px; }
+.tpl-card__preview {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--lib-line);
+  transition: transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease;
+}
+/* The iframe renders at four times the card width, so the page lays out as on a desktop screen. */
+.tpl-card__preview iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 400%;
+  border: 0;
+  transform: scale(.25);
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+.tpl-card__preview img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tpl-card:hover .tpl-card__preview { transform: translateY(-4px); box-shadow: 0 0 0 1px var(--lib-line), 0 18px 36px -24px rgba(0, 0, 0, .4); }
+.tpl-card__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--lib-muted); font-size: 11px; }
+.tpl-card__status { padding: 2px 8px; border-radius: 999px; background: #ebebe6; color: var(--lib-ink); font-size: 10px; white-space: nowrap; }
+.tpl-card[data-status="en-cours"] .tpl-card__status { background: #f1e5c6; }
+.tpl-card[data-status="publie"] .tpl-card__status { background: #111; color: #fff; }
+.tpl-card__name { margin-top: 8px; font-size: 18px; font-weight: 400; letter-spacing: -.01em; }
+.tpl-card__scope { margin-top: 4px; color: var(--lib-muted); line-height: 1.45; }
+.tpl-card__details {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--lib-line);
+  color: var(--lib-muted);
+  font-size: 11px;
+}
+.tpl-card__link { position: absolute; inset: 0; z-index: 1; border-radius: 6px; }
+.tpl-card__link:focus-visible { outline: 2px solid #8c877d; outline-offset: 6px; }
+.tpl-card--next {
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  aspect-ratio: 16 / 10;
+  border: 1px dashed var(--lib-line);
+  border-radius: 6px;
+  color: var(--lib-muted);
+  text-align: center;
+}
+.tpl-card--next small { font-size: 11px; }
+
+@container (max-width: 900px) {
+  .section-templates__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@container (max-width: 560px) {
+  .section-templates__head { flex-direction: column; align-items: flex-start; }
+  .section-templates__grid { grid-template-columns: minmax(0, 1fr); }
+}

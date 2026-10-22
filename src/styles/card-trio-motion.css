@@ -1,0 +1,60 @@
+/* Card trio motion study — resting look only; every pose and move is written by GSAP. */
+.trio-lab { --trio-card-radius: 12px; --trio-text-size: 13px; }
+.trio-lab .artist-bio-lab__stage { position: relative; display: block; min-height: 560px; padding: 0; }
+.trio-lab__viewport {
+  position: absolute;
+  top: calc(50% - 45px);
+  left: 50%;
+  width: 760px;
+  height: 620px;
+  translate: -50% -50%;
+  scale: var(--trio-fit, 1);
+  perspective: 1400px;
+}
+.trio-lab__scene { position: absolute; inset: 0; pointer-events: none; }
+.trio-lab[data-variant="parallaxe"] .trio-lab__scene { transform-style: preserve-3d; }
+.trio-lab__sheet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 560px;
+  height: 554px;
+  margin: -277px 0 0 -280px;
+  border-radius: 24px;
+  background: #fff;
+  opacity: 0;
+}
+.trio-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 280px;
+  overflow: hidden;
+  border-radius: var(--trio-card-radius);
+  background: #fff;
+  backface-visibility: hidden;
+}
+.trio-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.trio-card--artwork img { transform: scale(1.17); }
+.trio-card--portrait img { object-position: 48% 35%; transform: scale(1.3); }
+.trio-card--bio { padding: 15px 15px 20px; border-radius: var(--trio-card-radius); font-size: var(--trio-text-size); line-height: 1.05; }
+.trio-card__text { display: flex; flex-direction: column; gap: clamp(10px, calc(30px - var(--trio-text-size)), 20px); }
+.trio-card--bio h2 { font-size: 18px; font-weight: 500; line-height: 1; }
+.trio-card__date { margin-top: 8px; color: #777; font-size: 10px; line-height: 1.05; }
+.trio-lab[data-variant="paquet"] .trio-card,
+.trio-lab[data-variant="parallaxe"] .trio-card { box-shadow: 0 24px 48px -28px rgba(0, 0, 0, .35); }
+.trio-lab__hit {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+.trio-lab__hit:focus-visible { outline: 2px solid #8c877d; outline-offset: -8px; }
+.trio-lab[data-variant="paquet"] .trio-lab__hit { cursor: grab; touch-action: none; }
+.trio-lab[data-variant="paquet"] .trio-lab__hit:active { cursor: grabbing; }
+.trio-lab[data-variant="parallaxe"] .trio-lab__hit { cursor: default; }

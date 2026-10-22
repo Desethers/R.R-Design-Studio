@@ -1,0 +1,15 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>R.R Design Studio — Composants</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/styles/library.css"><link rel="stylesheet" href="/src/styles/gallery-templates.css"><link rel="stylesheet" href="/src/styles/card-trio-motion.css"><link rel="stylesheet" href="/src/styles/grid-artist-story.css"><link rel="stylesheet" href="/src/styles/exhibition-views.css"><link rel="stylesheet" href="/src/styles/exhibition-motion-study.css">
+<style>body{width:1440px;padding:48px;background:#f4f4f1}.export-entry{margin:0 0 100px}.export-heading{font-size:14px;font-weight:500;margin-bottom:28px}.export-content{background:#fff;padding:40px;position:relative;overflow:hidden}.export-content[data-layout=narrow]{width:480px}.export-content[data-layout=wide]{width:800px}.export-content[data-layout=text]{width:720px}img{content-visibility:visible!important}.export-content>.section-embed{height:1000px}</style>
+</head><body><main id="export-root"></main><script type="module">
+import {registry} from '/src/library/registry.js';
+const category=new URLSearchParams(location.search).get('category')||'artwork';
+const entries=registry.filter(e=>e.category===category);
+document.title=`R.R Design Studio — ${category}`;
+document.querySelector('main').innerHTML=entries.map(e=>`<section class="export-entry" id="${e.id}"><h2 class="export-heading">${e.code} / ${e.family} / ${e.name}</h2><div class="export-content" data-layout="${e.layout}">${e.render()}</div></section>`).join('');
+for(const img of document.images){img.loading='eager';}
+await document.fonts.ready;
+await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+const script=document.createElement('script');script.src='https://mcp.figma.com/mcp/html-to-design/capture.js';document.head.appendChild(script);
+</script></body></html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>In Situ — Fabienne Leclerc · Concept R.R Design Studio</title>
+  <meta name="description" content="In Situ — Fabienne Leclerc. Expositions, artistes et actualités : une lecture éditoriale de la galerie.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/in-situ/style.css">
+  <script type="module" src="/src/in-situ/page.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+  <header class="site-header" data-header>
+    <a class="wordmark" href="/in-situ-fabienne-leclerc.html" aria-label="In Situ — Fabienne Leclerc, accueil"><span>IN SITU</span><span>FABIENNE LECLERC</span></a>
+    <nav class="desktop-nav" aria-label="Navigation principale">
+      <a href="/in-situ-fabienne-leclerc.html#artistes">Artistes</a>
+      <a href="/in-situ-fabienne-leclerc.html#expositions">Expositions</a>
+      <a href="/in-situ-fabienne-leclerc.html#actualites">Actualités</a>
+      <a href="#contact">Galerie</a>
+    </nav>
+    <div class="header-actions"><button type="button" class="search-toggle" data-search-open aria-label="Ouvrir la recherche">Recherche <span aria-hidden="true">↗</span></button><button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">Menu <span aria-hidden="true">+</span></button></div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Navigation mobile" hidden>
+      <a href="/in-situ-fabienne-leclerc.html#artistes">Artistes</a><a href="/in-situ-fabienne-leclerc.html#expositions">Expositions</a><a href="/in-situ-fabienne-leclerc.html#actualites">Actualités</a><a href="#contact">Galerie</a><button type="button" data-search-open>Recherche ↗</button>
+    </nav>
+  </header>
+  <main id="main" tabindex="-1"><noscript><h1>In Situ — Fabienne Leclerc</h1><p>Expositions, artistes et actualités.</p><a href="https://www.insituparis.fr/">Consulter le site de la galerie →</a></noscript></main>
+  <dialog class="search-dialog" aria-labelledby="search-title"><div class="search-heading"><h2 id="search-title">Recherche</h2><button type="button" data-search-close aria-label="Fermer la recherche">Fermer ×</button></div><label class="sr-only" for="site-search">Artiste, exposition, actualité</label><input id="site-search" type="search" placeholder="Artiste, exposition, actualité…" autocomplete="off"><p class="micro" data-search-status role="status"></p><ul class="search-results"></ul></dialog>
+
+  <footer id="contact">
+    <div class="footer-brand"><span>In Situ</span><span>Fabienne Leclerc</span></div>
+    <div class="footer-contact"><p>43 rue de la Commune de Paris<br>93230 Romainville</p><p><a href="tel:+33153790612">+33 (0)1 53 79 06 12</a><br><a href="mailto:galerie@insituparis.fr">galerie@insituparis.fr</a></p></div>
+    <div class="footer-links"><a href="https://www.insituparis.fr/" target="_blank" rel="noopener">Site officiel ↗</a><a href="#main">Retour en haut ↑</a></div>
+    <p class="studio-note">Concept indépendant par R.R Design Studio, non commandité par la galerie.<br>Contenus et visuels : artistes et Galerie In Situ — Fabienne Leclerc.</p>
+  </footer>
+<script type="module">
+window.addEventListener('load', async () => {
+  for (const img of document.images) img.loading = 'eager';
+  await document.fonts.ready;
+  await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
+  const capture = document.createElement('script');
+  capture.src = 'https://mcp.figma.com/mcp/html-to-design/capture.js';
+  document.head.appendChild(capture);
+});
+</script>
+</body>
+</html>

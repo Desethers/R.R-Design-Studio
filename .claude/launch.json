@@ -5,7 +5,8 @@
       "name": "almine-rech",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3006
+      "port": 3006,
+      "autoPort": true
     }
   ]
 }

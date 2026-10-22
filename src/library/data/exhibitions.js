@@ -1,0 +1,38 @@
+export const exhibitions = [
+  {
+    id: "your-friends",
+    artist: "Sacha Elron",
+    title: "Your friends",
+    venue: "Galerie, Paris",
+    dates: "05 Sep — 18 Oct 2026",
+    status: "Current",
+    image: "/images/exhibitions/Exhibition1.png",
+  },
+  {
+    id: "chromatic-distance",
+    artist: "Group exhibition",
+    title: "Chromatic Distance",
+    venue: "Galerie, Brussels",
+    dates: "12 Nov 2026 — 17 Jan 2027",
+    status: "Upcoming",
+    image: "/images/exhibitions/Exhibition4.png",
+  },
+  {
+    id: "field-notes",
+    artist: "Minjung Kim",
+    title: "Field Notes",
+    venue: "Galerie, New York",
+    dates: "14 Mar — 30 Apr 2026",
+    status: "Past",
+    image: "/images/exh-minjung-kim.jpg",
+  },
+  {
+    id: "slow-light",
+    artist: "Emily Mason",
+    title: "Slow Light",
+    venue: "Galerie, London",
+    dates: "09 Jan — 21 Feb 2026",
+    status: "Past",
+    image: "/images/exh-emily-mason.jpg",
+  },
+];

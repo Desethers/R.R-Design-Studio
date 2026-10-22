@@ -1,0 +1,140 @@
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: #1a1a1a; font-family: "EB Garamond", Georgia, serif; font-size: 18px; }
+a { color: inherit; }
+button, input { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+.darmo-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 42px;
+  align-items: center;
+  gap: 24px;
+  height: 77px;
+  padding: 0 24px 0 0;
+  background: #fff;
+}
+.darmo-header__logo { width: max-content; font-size: 28px; letter-spacing: .2em; line-height: 1; text-decoration: none; white-space: nowrap; }
+.darmo-header__nav { display: flex; align-items: center; gap: clamp(38px, 5.1vw, 72px); height: 100%; white-space: nowrap; }
+.darmo-header__nav a { font-size: 15px; text-decoration: none; }
+.darmo-header__nav a:hover, .darmo-header__nav a:focus-visible { text-decoration: underline; text-underline-offset: 4px; }
+.darmo-header__bag { display: block; width: 29px; height: 36px; color: #9a8567; }
+.darmo-header__bag svg { display: block; width: 100%; height: 100%; }
+.darmo-header__menu-button { display: none; }
+.darmo-kicker { margin: 0; color: #8b7355; font-size: 16px; font-weight: 600; letter-spacing: 4px; line-height: 1; }
+.darmo-hero { padding: 125px 0 0; }
+.darmo-hero h1 { margin: 18px 0 7px; font-size: 80px; font-weight: 400; line-height: 1; }
+.darmo-hero__tagline { margin: 0; color: #8b7355; font-size: 28px; font-style: italic; line-height: 1.4; }
+.darmo-activities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 1500px;
+  margin: 127px 28px 0;
+}
+.darmo-activity-card { min-width: 0; background: #f8f7f4; }
+.darmo-home--v2 .darmo-activity-card { background: transparent; }
+.darmo-activity-card__image { display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: #ebeae6; }
+.darmo-activity-card__image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.darmo-activity-card__image--advisory img { object-position: center 62%; }
+.darmo-activity-card__image:hover img { transform: scale(1.025); }
+.darmo-activity-card__content { padding: 24px 28px 30px; }
+.darmo-activities h2, .darmo-exhibitions h2, .darmo-contact h2 { margin: 18px 0 14px; font-size: 48px; font-weight: 400; line-height: 1.15; }
+.darmo-activity-card__content > p:not(.darmo-kicker) { max-width: 490px; margin: 17px 0 0; font-size: 18px; line-height: 1.72; }
+.darmo-activity-card__content > a { display: inline-block; margin-top: 24px; font-size: 14px; text-decoration: none; }
+.darmo-activity-card__content > a:hover { text-decoration: underline; }
+.darmo-home--v2 .darmo-activity-card__arrow { display: inline-flex; width: 17px; height: 10px; margin-left: 3px; vertical-align: -1px; transition: transform .25s ease; }
+.darmo-home--v2 .darmo-activity-card__arrow svg { display: block; width: 100%; height: 100%; }
+.darmo-home--v2 .darmo-activity-card__content > a:hover .darmo-activity-card__arrow,
+.darmo-home--v2 .darmo-activity-card__content > a:focus-visible .darmo-activity-card__arrow { transform: translateX(6px); }
+@media (prefers-reduced-motion: reduce) {
+  .darmo-home--v2 .darmo-activity-card__arrow { transition: none; }
+}
+.darmo-exhibitions { margin-top: 160px; }
+.darmo-exhibitions__heading h2 { margin-top: 17px; }
+.darmo-exhibitions__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 69px; width: calc(100% - 50px); margin: 47px 0 0 18px; }
+.darmo-exhibition-card { min-width: 0; }
+.darmo-exhibition-card__image { display: block; width: 100%; aspect-ratio: 359 / 208; overflow: hidden; }
+.darmo-exhibition-card__image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.darmo-exhibition-card__image:hover img { transform: scale(1.035); }
+.darmo-exhibition-card__status { margin: 16px 0 7px; color: #666; font-size: 17px; }
+.darmo-exhibition-card h3 { margin: 0; font-size: 20px; font-style: italic; font-weight: 400; line-height: 1.28; }
+.darmo-exhibition-card__date { margin: 5px 0 4px; color: #666; font-size: 17px; }
+.darmo-exhibition-card__more { font-size: 17px; text-decoration: underline; }
+.darmo-contact { margin: 127px auto 0; text-align: center; }
+.darmo-contact h2 { margin: 22px auto 16px; line-height: 1.1; }
+.darmo-contact > p:not(.darmo-kicker) { margin: 0; font-size: 18px; }
+.darmo-contact__actions { display: flex; justify-content: center; gap: 66px; margin: 37px auto 0; }
+.darmo-contact__actions > div { width: 300px; }
+.darmo-contact__actions a { display: grid; place-items: center; min-height: 51px; background: #8b7355; color: #fff; font-size: 16px; letter-spacing: 2px; text-decoration: none; }
+.darmo-contact__actions a:hover { background: #776044; }
+.darmo-contact__actions span { display: block; margin-top: 8px; font-size: 17px; }
+.darmo-newsletter { min-height: 842px; margin-top: 85px; }
+.darmo-newsletter__form-wrap { width: min(560px, calc(100% - 40px)); margin: 0 auto; padding: 22px 48px 0; }
+.darmo-newsletter h2 { margin: 0 0 19px; font-size: 31px; line-height: 1; }
+.darmo-newsletter__form-wrap > p { margin: 0 0 17px; font-size: 16px; }
+.darmo-newsletter__form { display: flex; flex-direction: column; gap: 15px; font-size: 16px; }
+.darmo-newsletter__form label:not(.darmo-newsletter__consent) { display: flex; flex-direction: column; gap: 7px; font-weight: 600; }
+.darmo-newsletter__label em { color: #b3332a; font-style: normal; }
+.darmo-newsletter__form input:not([type="checkbox"]) { width: 100%; height: 41px; padding: 0 9px; border: 1px solid #cccfd3; border-radius: 1px; background: #fff; font-size: 15px; font-weight: 400; }
+.darmo-newsletter__form input::placeholder { color: #666; }
+.darmo-newsletter__form small { color: #555; font-size: 12px; font-weight: 400; }
+.darmo-newsletter__phone { display: flex; align-items: center; width: 100%; gap: 7px; }
+.darmo-newsletter__phone > span { flex: 0 0 82px; height: 41px; padding: 10px 7px; border: 1px solid #cccfd3; font-size: 14px; font-weight: 400; }
+.darmo-newsletter__consent { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; }
+.darmo-newsletter__consent input { margin: 2px 0 0; accent-color: #111; }
+.darmo-newsletter__consent span { color: #1a1a1a !important; }
+.darmo-newsletter__form button { align-self: flex-start; min-height: 40px; margin-top: 2px; padding: 0 17px; border: 0; background: #111; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; }
+.darmo-newsletter__notice { margin: 0; color: #555; font-size: 13px; }
+.darmo-footer { position: relative; display: flex; justify-content: space-between; min-height: 330px; padding: 49px max(30px, calc((100vw - 970px) / 2)) 34px max(30px, calc((100vw - 840px) / 2)); border-top: 1px solid #1a1a1a; }
+.darmo-footer nav { display: flex; flex-direction: column; gap: 13px; }
+.darmo-footer nav a { width: max-content; font-size: 17px; text-decoration: none; }
+.darmo-footer nav a:hover { text-decoration: underline; }
+.darmo-footer__right { align-self: flex-end; margin-bottom: 6px; }
+.darmo-footer__right p { margin: 0 0 12px; font-size: 17px; }
+.darmo-footer__newsletter { display: block; min-width: 286px; border: 1px solid #8b7355; padding: 7px 16px; color: #8b7355; font-size: 14px; letter-spacing: 1.4px; text-decoration: none; }
+.darmo-footer__socials { display: flex; gap: 15px; margin-top: 12px; }
+.darmo-footer__socials a { display: block; width: 20px; height: 20px; }
+.darmo-footer__socials img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.darmo-footer__copyright { position: absolute; left: 50%; bottom: 17px; margin: 0; font-size: 15px; transform: translateX(-50%); }
+.darmo-cookie { position: fixed; right: 0; bottom: 0; left: 0; z-index: 15; display: flex; align-items: center; gap: 12px; min-height: 68px; padding: 9px 20px; background: #fff; box-shadow: 0 -2px 7px rgba(0,0,0,.08); font-family: Arial, Helvetica, sans-serif; }
+.darmo-cookie[hidden] { display: none; }
+.darmo-cookie p { flex: 1; margin: 0; font-size: 12px; line-height: 1.4; }
+.darmo-cookie button { min-height: 35px; padding: 0 20px; border: 1px solid #777; background: #fff; color: #111; font-size: 12px; cursor: pointer; }
+.darmo-cookie button[data-cookie-accept] { background: #111; color: #fff; }
+.darmo-cookie .darmo-cookie__close { border: 0; padding: 0 4px; font-size: 20px; }
+@media (max-width: 900px) {
+  .darmo-header { grid-template-columns: 1fr 44px 38px; padding-left: 20px; }
+  .darmo-header__menu-button { display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; border: 0; background: none; }
+  .darmo-header__menu-button span { display: block; width: 21px; height: 1px; background: #1a1a1a; }
+  .darmo-header__nav { position: absolute; top: 77px; right: 0; left: 0; display: none; flex-direction: column; align-items: flex-start; gap: 0; height: auto; padding: 12px 22px 20px; background: #fff; box-shadow: 0 10px 16px rgba(0,0,0,.07); }
+  .darmo-header__nav[data-open="true"] { display: flex; }
+  .darmo-header__nav a { width: 100%; padding: 10px 0; font-size: 18px; }
+  .darmo-hero { padding-left: 20px; }
+  .darmo-exhibitions { padding: 0 20px; }
+  .darmo-exhibitions__grid { width: 100%; gap: 22px; margin-inline: 0; }
+  .darmo-footer { padding-inline: 8vw; }
+  .darmo-footer__copyright { right: auto; }
+}
+@media (max-width: 650px) {
+  .darmo-hero { padding-top: 110px; }
+  .darmo-hero h1 { font-size: 64px; }
+  .darmo-activities { grid-template-columns: 1fr; gap: 28px; margin: 100px 20px 0; }
+  .darmo-activity-card__content { padding: 20px 22px 26px; }
+  .darmo-activities h2, .darmo-exhibitions h2, .darmo-contact h2 { font-size: 40px; }
+  .darmo-exhibitions { margin-top: 130px; }
+  .darmo-exhibitions__grid { grid-template-columns: 1fr; gap: 50px; margin-top: 35px; }
+  .darmo-contact { margin-top: 110px; padding-inline: 20px; }
+  .darmo-contact h2 br { display: none; }
+  .darmo-contact__actions { flex-direction: column; align-items: center; gap: 28px; }
+  .darmo-newsletter { min-height: auto; margin: 150px 0 120px; }
+  .darmo-newsletter__form-wrap { padding-inline: 0; }
+  .darmo-footer { min-height: 430px; flex-direction: column; gap: 40px; padding: 35px 25px 65px; }
+  .darmo-footer__right { align-self: flex-start; }
+  .darmo-footer__copyright { right: auto; }
+  .darmo-cookie { flex-wrap: wrap; padding: 11px 14px; }
+  .darmo-cookie p { flex-basis: 100%; }
+}

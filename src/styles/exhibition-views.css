@@ -1,0 +1,156 @@
+/* Installation views of a group show — grid, artist index and viewer.
+   Motion lives in exhibition-views-interaction.js; CSS only handles hover states. */
+.section-exh-views {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  color: var(--lib-ink);
+  font-size: 13px;
+}
+.section-exh-views__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--lib-line);
+}
+.section-exh-views__kicker { color: var(--lib-muted); font-size: 11px; }
+.section-exh-views__head h2 { margin-top: 10px; font-size: clamp(30px, 4.2cqi, 48px); font-weight: 400; line-height: 1; letter-spacing: -.02em; }
+.section-exh-views__artists { max-width: 64ch; margin-top: 14px; color: var(--lib-muted); font-size: 12px; line-height: 1.5; }
+.section-exh-views__artists span { color: var(--lib-ink); }
+.section-exh-views__meta { flex-shrink: 0; color: var(--lib-muted); font-size: 12px; line-height: 1.5; text-align: right; }
+.exh-viewer__artists { color: var(--lib-muted); font-size: 12px; line-height: 1.5; }
+.exh-viewer__artists .exh-label__name { color: var(--lib-ink); font-size: 13px; }
+.section-exh-views__bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0 40px;
+}
+.section-exh-views__index { display: flex; flex-wrap: wrap; gap: 2px 20px; }
+.section-exh-views__index button {
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: var(--lib-muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color .25s ease;
+}
+.section-exh-views__index button span { margin-left: 3px; font-size: 9px; vertical-align: super; font-variant-numeric: tabular-nums; }
+.section-exh-views__index button:hover,
+.section-exh-views__index button.is-linked,
+.section-exh-views__index button[aria-pressed="true"] { color: var(--lib-ink); }
+.section-exh-views__index button[aria-pressed="true"] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.section-exh-views__index button:focus-visible { outline: 2px solid #8c877d; outline-offset: 3px; }
+.section-exh-views__count { flex-shrink: 0; color: var(--lib-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+.section-exh-views__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 52px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.exh-view[hidden] { display: none; }
+.exh-view__open { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.exh-view__open:focus-visible { outline: 2px solid #8c877d; outline-offset: 6px; }
+/* Hover and dimming sit on the frame: the <img> itself is left free for Flip. */
+.exh-view__frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 3 / 2;
+  transition: opacity .35s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+.exh-view__frame img { position: relative; display: block; }
+.exh-view[data-fit="width"] .exh-view__frame img { width: 100%; height: auto; }
+.exh-view[data-fit="height"] .exh-view__frame img { width: auto; height: 100%; }
+.exh-view__open:hover .exh-view__frame { transform: scale(1.02); }
+.exh-view__caption { display: flex; gap: 10px; margin-top: 14px; line-height: 1.45; transition: color .35s ease; }
+.exh-view__caption span { color: var(--lib-muted); font-variant-numeric: tabular-nums; }
+.section-exh-views.is-highlighting .exh-view:not(.is-match) .exh-view__frame { opacity: .15; }
+.section-exh-views.is-highlighting .exh-view:not(.is-match) .exh-view__caption { color: #c4c4be; }
+
+@container (max-width: 980px) {
+  .section-exh-views__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@container (max-width: 640px) {
+  .section-exh-views__head,
+  .section-exh-views__bar { flex-direction: column; align-items: flex-start; }
+  .section-exh-views__meta { text-align: left; }
+  .section-exh-views__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 16px; }
+}
+
+.exh-viewer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: clamp(16px, 3vw, 40px);
+  border: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+  grid-template-rows: minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 56px);
+  background: rgba(246, 246, 243, .97);
+  color: var(--lib-ink);
+  font-size: 13px;
+}
+.exh-viewer[open] { display: grid; }
+.exh-viewer::backdrop { background: transparent; }
+.exh-viewer__media { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; cursor: zoom-out; }
+.exh-viewer__media img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; cursor: default; }
+.exh-viewer__panel { display: flex; flex-direction: column; gap: 28px; min-height: 0; overflow-y: auto; }
+.exh-viewer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--lib-line);
+}
+.exh-viewer__counter { color: var(--lib-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.exh-viewer__close {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: #e9e9e4;
+  color: var(--lib-ink);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+.exh-viewer__label { display: flex; flex-direction: column; gap: 22px; }
+.exh-label__name { margin-bottom: 6px; font-weight: 500; }
+.exh-label__work { line-height: 1.45; }
+.exh-label__work + .exh-label__work { margin-top: 6px; }
+.exh-label__work span { display: block; color: var(--lib-muted); font-size: 12px; }
+.exh-viewer__credit { color: var(--lib-muted); font-size: 12px; line-height: 1.5; }
+.exh-viewer__nav { display: flex; gap: 8px; margin-top: auto; }
+.exh-viewer__nav button {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--lib-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--lib-ink);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.exh-viewer__nav button:hover { background: #ebebe6; }
+.exh-viewer button:focus-visible { outline: 2px solid #8c877d; outline-offset: 2px; }
+
+@media (max-width: 720px) {
+  .exh-viewer { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
+  .exh-viewer__panel { max-height: 45dvh; gap: 18px; }
+}

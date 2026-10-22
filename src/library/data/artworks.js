@@ -1,0 +1,58 @@
+export const artworks = [
+  {
+    id: "sacha-blue",
+    artist: "Sacha Elron",
+    title: "Untitled",
+    year: "2025",
+    medium: "Acrylic on canvas",
+    dimensions: "120 x 120 cm",
+    image: "/images/Pieces/Sacha%20Elron/portrait2.jpg",
+  },
+  {
+    id: "van-gogh-cypresses",
+    artist: "Vincent van Gogh",
+    title: "Cypresses",
+    year: "1889",
+    medium: "Oil on canvas",
+    dimensions: "93.4 x 74 cm",
+    image: "/images/Pieces/Vincent%20van%20Gogh/cypresses-1889.jpg",
+  },
+  {
+    id: "van-gogh-irises",
+    artist: "Vincent van Gogh",
+    title: "Irises",
+    year: "1890",
+    medium: "Oil on canvas",
+    dimensions: "73.7 x 92.1 cm",
+    image: "/images/Pieces/Vincent%20van%20Gogh/irises-1890.jpg",
+  },
+  {
+    id: "klint-swan",
+    artist: "Hilma af Klint",
+    title: "The Swan, No. 10",
+    year: "1915",
+    medium: "Oil on canvas",
+    dimensions: "150 x 150 cm",
+    image: "/images/Pieces/the-swan-no-10-af-klint.jpg",
+  },
+  {
+    id: "monet-sunrise",
+    artist: "Claude Monet",
+    title: "Impression, Sunrise",
+    year: "1872",
+    medium: "Oil on canvas",
+    dimensions: "48 x 63 cm",
+    image: "/images/Pieces/impression-sunrise-monet.jpg",
+  },
+  {
+    id: "mondrian-composition",
+    artist: "Piet Mondrian",
+    title: "Composition No. IV",
+    year: "1914",
+    medium: "Oil on canvas",
+    dimensions: "95.2 x 67.6 cm",
+    image: "/images/Pieces/composition-no-iv-mondrian.jpg",
+  },
+];
+
+export const featuredArtwork = artworks[0];

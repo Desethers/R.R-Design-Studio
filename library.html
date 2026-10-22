@@ -1,110 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Galerie - Library</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
-  <style>
-    :root { --line: #d8d8d8; --ink: #111; --muted: #707070; --paper: #fff; }
-    * { box-sizing: border-box; }
-    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, Arial, sans-serif; font-size: 14px; font-weight: 400; }
-    button { font: inherit; }
-    .library-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--line); }
-    .library-title { margin: 0; font-size: 14px; font-weight: 400; }
-    .library-title span { color: var(--muted); }
-    .library-nav { display: flex; gap: .25rem; }
-    .library-nav button { min-height: 30px; padding: .35rem .65rem; color: var(--muted); background: none; border: 0; cursor: pointer; }
-    .library-nav button[aria-selected="true"] { color: var(--ink); border-bottom: 1px solid var(--ink); }
-    .library-main { max-width: 1280px; margin: 0 auto; padding: 4rem 1.5rem; }
-    .library-section { display: none; }
-    .library-section.is-active { display: block; }
-    .section-header { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, .42fr); gap: 2rem; align-items: end; margin-bottom: 4rem; }
-    h1 { margin: 0; font-size: clamp(2.25rem, 5vw, 4.5rem); font-weight: 400; line-height: 1; letter-spacing: 0; }
-    .section-header p { margin: 0; color: var(--muted); line-height: 1.45; }
-    .component-list { border-top: 1px solid var(--line); }
-    .component-row { display: grid; grid-template-columns: 170px 1fr; gap: 2rem; min-height: 150px; padding: 1.25rem 0; border-bottom: 1px solid var(--line); }
-    .component-label { color: var(--muted); }
-    .component-example { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .75rem; }
-    .type-display { font-size: clamp(2rem, 5vw, 4rem); line-height: .95; }
-    .type-caption { max-width: 34rem; font-size: 11px; line-height: 1.45; }
-    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: .35rem .85rem; color: var(--ink); background: transparent; border: 1px solid var(--ink); text-decoration: none; }
-    .button--solid { color: var(--paper); background: var(--ink); }
-    .artwork { width: min(100%, 320px); }
-    .artwork-image { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #e7e6e2; }
-    .artwork-caption { margin-top: .55rem; font-size: 11px; line-height: 1.45; }
-    .artwork-caption em { font-style: italic; }
-    .page-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); }
-    .page-card { min-height: 270px; padding: 1.25rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
-    .page-card:nth-child(2n) { border-right: 0; }
-    .page-card span { color: var(--muted); font-size: 11px; }
-    .page-card h2 { max-width: 20rem; margin: 5rem 0 0; font-size: clamp(1.5rem, 3vw, 2.6rem); font-weight: 400; line-height: 1.05; }
-    .page-card p { max-width: 24rem; margin: .75rem 0 0; color: var(--muted); line-height: 1.45; }
-    @media (max-width: 640px) {
-      .library-header { align-items: flex-start; flex-direction: column; gap: .65rem; }
-      .library-main { padding-top: 3rem; }
-      .section-header, .component-row { grid-template-columns: 1fr; gap: 1rem; }
-      .section-header { margin-bottom: 3rem; }
-      .page-grid { grid-template-columns: 1fr; }
-      .page-card, .page-card:nth-child(2n) { border-right: 0; }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FOR ART / PATTERNS</title>
+  <meta http-equiv="refresh" content="0; url=/library/">
+  <link rel="canonical" href="/library/">
 </head>
 <body>
-  <header class="library-header">
-    <p class="library-title">Galerie <span>/ Library</span></p>
-    <nav class="library-nav" aria-label="Library sections" role="tablist">
-      <button type="button" role="tab" aria-selected="true" aria-controls="foundations" id="foundations-tab">Foundations</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="components" id="components-tab">Components</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="pages" id="pages-tab">Pages</button>
-    </nav>
-  </header>
-
-  <main class="library-main">
-    <section class="library-section is-active" id="foundations" role="tabpanel" aria-labelledby="foundations-tab">
-      <div class="section-header"><h1>Foundations</h1><p>The visual rules shared by every gallery experience.</p></div>
-      <div class="component-list">
-        <div class="component-row"><span class="component-label">Display type</span><div class="component-example"><p class="type-display">Your friends</p></div></div>
-        <div class="component-row"><span class="component-label">Body type</span><div class="component-example"><p class="type-caption">Sacha Elron<br><em>Untitled</em>, 2025<br>Acrylic on canvas, 120 x 120 cm</p></div></div>
-        <div class="component-row"><span class="component-label">Actions</span><div class="component-example"><a class="button button--solid" href="#">Inquire</a><a class="button" href="#">View checklist</a></div></div>
-      </div>
-    </section>
-
-    <section class="library-section" id="components" role="tabpanel" aria-labelledby="components-tab" hidden>
-      <div class="section-header"><h1>Components</h1><p>Small, composable editorial units for exhibitions, artists and viewing rooms.</p></div>
-      <div class="component-list">
-        <div class="component-row"><span class="component-label">Artwork card</span><div class="component-example"><article class="artwork"><img class="artwork-image" src="images/Pieces/Sacha%20Elron/painting-01.png" alt="Sacha Elron, Untitled, 2025" width="5504" height="3072" loading="lazy" decoding="async" /><p class="artwork-caption">Sacha Elron<br><em>Untitled</em>, 2025<br>Acrylic on canvas, 120 x 120 cm</p></article></div></div>
-        <div class="component-row"><span class="component-label">Actions</span><div class="component-example"><a class="button" href="#">Inquire</a><a class="button" href="#">Artist page</a></div></div>
-      </div>
-    </section>
-
-    <section class="library-section" id="pages" role="tabpanel" aria-labelledby="pages-tab" hidden>
-      <div class="section-header"><h1>Pages</h1><p>Full-page structures assembled from the foundations and components above.</p></div>
-      <div class="page-grid">
-        <a class="page-card" href="exhibition.html"><span>01</span><h2>Exhibition</h2><p>Hero, contextual information, curatorial text, artworks and inquiry.</p></a>
-        <a class="page-card" href="artist-pages.html"><span>02</span><h2>Artist pages</h2><p>Open the artist-page collection and switch between its available variations.</p></a>
-        <a class="page-card" href="#"><span>03</span><h2>Viewing room</h2><p>A self-contained digital exhibition with a focused navigation model.</p></a>
-        <a class="page-card" href="index.html"><span>04</span><h2>Homepage</h2><p>Current program, featured artworks, artists and news.</p></a>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const tabs = document.querySelectorAll('.library-nav [role="tab"]');
-    const panels = document.querySelectorAll('.library-section[role="tabpanel"]');
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => {
-        tabs.forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
-        panels.forEach((panel) => {
-          const active = panel.id === tab.getAttribute('aria-controls');
-          panel.classList.toggle('is-active', active);
-          panel.hidden = !active;
-        });
-      });
-    });
-  </script>
+  <p><a href="/library/">Open FOR ART / PATTERNS</a></p>
 </body>
 </html>

@@ -1,0 +1,105 @@
+@font-face {
+  font-family: "EB Garamond";
+  src: url("/src/fonts/ebgaramond-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html { background: #f9f9f9; }
+
+body {
+  margin: 0;
+  color: #000;
+  background: #f9f9f9;
+  font: 15px/20px "EB Garamond", Times, serif;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header__logo {
+  position: fixed;
+  z-index: 10;
+  top: 35px;
+  left: 35px;
+  width: 180px;
+}
+
+.site-header__logo img { display: block; width: 100%; height: auto; }
+
+.site-header__nav,
+.exhibition-nav {
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.site-header__nav { top: 87px; left: 230px; gap: 20px; }
+.exhibition-nav { top: 118px; left: 289px; gap: 18px; }
+
+.exhibition {
+  width: calc(100% - 304px);
+  margin: 148px 15px 50px 289px;
+}
+
+.exhibition__heading { width: 85%; }
+.exhibition__heading h1,
+.exhibition__heading p,
+.press-release h2,
+.press-release p { margin: 0; font: inherit; }
+.exhibition__heading h1 { line-height: 22px; }
+
+.press-release { width: 65%; margin-top: 20px; }
+.press-release h2 { margin-bottom: 15px; line-height: 22px; }
+.press-release p { line-height: 21px; text-align: justify; }
+.press-release p + p { margin-top: 21px; }
+
+.exhibition__images { margin-top: 37px; }
+.exhibition-image { position: relative; margin: 0 0 37px; }
+.exhibition-image img { display: block; height: auto; }
+.exhibition-image--wide img { width: 85%; }
+.exhibition-image--narrow img { width: 42.5%; }
+
+.exhibition-image figcaption {
+  position: absolute;
+  right: calc(100% + 20px);
+  bottom: 0;
+  width: 130px;
+  font-size: 13.05px;
+  line-height: 1.2;
+}
+
+@media (max-width: 800px) {
+  .site-header { padding: 26px 22px 0; }
+  .site-header__logo,
+  .site-header__nav,
+  .exhibition-nav { position: static; }
+  .site-header__logo { display: block; width: 150px; }
+  .site-header__nav { margin-top: 24px; flex-wrap: wrap; gap: 4px 18px; }
+  .exhibition-nav { margin-top: 12px; flex-wrap: wrap; gap: 4px 18px; }
+
+  .exhibition { width: auto; margin: 28px 22px 50px; }
+  .exhibition__heading,
+  .press-release { width: min(100%, 632px); }
+  .press-release { margin-top: 26px; }
+  .press-release p { text-align: left; }
+  .exhibition__images { margin-top: 36px; }
+  .exhibition-image { margin-bottom: 44px; }
+  .exhibition-image--wide img { width: 100%; }
+  .exhibition-image--narrow img { width: min(65%, 415px); }
+
+  .exhibition-image figcaption {
+    position: static;
+    width: auto;
+    max-width: 300px;
+    margin-top: 9px;
+  }
+}
+
+@media (max-width: 450px) {
+  .exhibition-image--narrow img { width: 100%; }
+}
