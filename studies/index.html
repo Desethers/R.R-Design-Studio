@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R.R Design Studio — Études</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: clamp(24px, 5vw, 72px); color: #252522; background: #faf9f7; font: 16px/1.6 system-ui, sans-serif; }
+    main { max-width: 1100px; margin: auto; }
+    h1 { font-size: clamp(28px, 4vw, 46px); font-weight: 500; margin: 24px 0 8px; }
+    h2 { font-size: 19px; font-weight: 500; margin-top: 0; }
+    p { color: #696961; }
+    nav { display: flex; gap: 24px; flex-wrap: wrap; }
+    a { color: inherit; text-underline-offset: 4px; }
+    a:focus-visible { outline: 2px solid #555; outline-offset: 5px; }
+    .groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 24px; margin-top: 40px; }
+    section { background: white; border: 1px solid #e4e2dd; padding: 28px; border-radius: 16px; }
+    ul { padding: 0; list-style: none; margin-bottom: 0; }
+    li + li { margin-top: 16px; }
+    li a { display: block; }
+  </style>
+</head>
+<body>
+  <main>
+    <nav aria-label="Accès principaux"><a href="../library/">Bibliothèque de composants</a><a href="../index.html">Site principal</a><a href="../README.md">Plan du dossier</a></nav>
+    <h1>Les études du studio</h1>
+    <p>Toutes les pages expérimentales, regroupées par sujet.</p>
+    <div class="groups">
+      <section aria-labelledby="artists"><h2 id="artists">Artistes</h2><ul>
+        <li><a href="artists/artist-gustave-caillebotte-library.html">Gustave Caillebotte</a></li>
+        <li><a href="artists/artist-hilma-af-klint-library.html">Hilma af Klint</a></li>
+        <li><a href="artists/artist-van-gogh-library.html">Vincent van Gogh</a></li>
+        <li><a href="artists/artist-van-gogh-expand-lab.html">Vincent van Gogh — Expand Lab</a></li>
+      </ul></section>
+      <section aria-labelledby="exhibitions"><h2 id="exhibitions">Expositions</h2><ul>
+        <li><a href="exhibitions/exhibition-embracing-grounds.html">Embracing Grounds</a></li>
+        <li><a href="exhibitions/exhibition-embracing-grounds-filmstrip.html">Embracing Grounds — Filmstrip</a></li>
+        <li><a href="exhibitions/exhibition-text-library.html">Texte d’exposition</a></li>
+        <li><a href="exhibitions/exhibitions-library.html">Liste et filtres d’expositions</a></li>
+      </ul></section>
+      <section aria-labelledby="galleries"><h2 id="galleries">Sites de galeries</h2><ul>
+        <li><a href="gallery-sites/darmo-home.html">Darmo — Version 1</a></li>
+        <li><a href="gallery-sites/darmo-home-v2.html">Darmo — Version 2</a></li>
+        <li><a href="gallery-sites/in-situ-fabienne-leclerc.html">In Situ — Fabienne Leclerc</a></li>
+        <li><a href="gallery-sites/les-objecteurs.html">Les Objecteurs</a></li>
+        <li><a href="gallery-sites/galerie-allen-jason-dodge.html">Galerie Allen — Jason Dodge</a></li>
+      </ul></section>
+    </div>
+  </main>
+</body>
+</html>

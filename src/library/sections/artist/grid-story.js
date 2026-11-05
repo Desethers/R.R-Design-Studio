@@ -1,11 +1,11 @@
 import { objectImage } from "../../primitives/index.js";
 
 export function GridArtistStory(artist) {
-  const portrait = "/images/Pieces/Vincent%20van%20Gogh/MV5BOTg5MTU4NDk1Nl5BMl5BanBnXkFtZTgwNjE3MjY3NjM%40._V1_.jpg";
+  const portrait = "/images/artists/Vincent%20van%20Gogh/MV5BOTg5MTU4NDk1Nl5BMl5BanBnXkFtZTgwNjE3MjY3NjM%40._V1_.jpg";
   const starryNight = {
     artist: "Vincent van Gogh",
     title: "The Starry Night",
-    image: "/images/Pieces/Vincent%20van%20Gogh/VanGogh-starry_night_ballance1.jpg",
+    image: "/images/artists/Vincent%20van%20Gogh/VanGogh-starry_night_ballance1.jpg",
   };
 
   return `

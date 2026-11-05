@@ -1,6 +1,6 @@
 # In Situ — direction éditoriale
 
-Le concept conserve son entrée `/in-situ-fabienne-leclerc.html`, sa palette et ses assets. Il reste en HTML, CSS et modules JavaScript, sans framework ni dépendance supplémentaire.
+Le concept est accessible à `/studies/gallery-sites/in-situ-fabienne-leclerc.html`. Il reste en HTML, CSS et modules JavaScript, sans framework ni dépendance supplémentaire.
 
 ## Organisation
 
@@ -12,7 +12,7 @@ Le concept conserve son entrée `/in-situ-fabienne-leclerc.html`, sa palette et 
 
 ## Navigation
 
-- Accueil : `/in-situ-fabienne-leclerc.html`
+- Accueil : `/studies/gallery-sites/in-situ-fabienne-leclerc.html`
 - Index : même URL avec `#artistes`
 - Artiste : `?artist=daniele-genadry` (cinq artistes avec assets locaux)
 - Exposition / projet : `?exhibition=edge-of-land` (cinq projets)

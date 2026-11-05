@@ -1,6 +1,6 @@
 // Editorial content and assets already present in the In Situ concept.
 // Unknown dates, dimensions and biographies are deliberately left unset.
-export const homeUrl = '/in-situ-fabienne-leclerc.html';
+export const homeUrl = '/studies/gallery-sites/in-situ-fabienne-leclerc.html';
 export const officialUrl = 'https://www.insituparis.fr/';
 export const artistUrl = id => `${homeUrl}?artist=${encodeURIComponent(id)}`;
 export const exhibitionUrl = id => `${homeUrl}?exhibition=${encodeURIComponent(id)}`;

@@ -11,7 +11,7 @@ export const artists = [
     name: "Vincent van Gogh",
     location: "Zundert / Auvers-sur-Oise",
     years: "1853–1890",
-    image: "/images/Pieces/Vincent%20van%20Gogh/self-portrait-straw-hat-1887.jpg",
+    image: "/images/artists/Vincent%20van%20Gogh/self-portrait-straw-hat-1887.jpg",
   },
   {
     id: "hilma-af-klint",
@@ -43,7 +43,7 @@ export const artistDirectory = [
   {
     id: "vincent-van-gogh",
     name: "Vincent Van Gogh",
-    image: "/images/Pieces/Vincent%20van%20Gogh/portrait%20vangogh.png",
+    image: "/images/artists/Vincent%20van%20Gogh/portrait%20vangogh.png",
     born: "30 mars 1853 · Zundert, Pays-Bas",
     intro: "Peintre néerlandais, Vincent van Gogh développe une œuvre où la couleur et le geste deviennent intensément expressifs.",
     bio: "En un peu plus de dix ans, il réalise des paysages, des portraits et des natures mortes qui renouvellent profondément la peinture moderne.",

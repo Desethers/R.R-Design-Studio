@@ -2,18 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gustave Caillebotte – Galerie</title>
+  <title>Hilma af Klint – Galerie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
   <style>
     /* ── ARTIST DETAIL PAGE ─────────────────────────── */
-
-    @media (min-width: 1025px) {
-      :root { --gutter: 2.5rem; }
-    }
 
     html,
     body {
@@ -794,7 +790,7 @@
       position: absolute;
       inset: 0;
       background-color: #e8e2d8;
-      background-image: url("images/room-bg.png");
+      background-image: url("/images/room-bg.png");
       background-size: cover;
       background-position: center 20%;
     }
@@ -1073,33 +1069,25 @@
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="artists.html">Artists</a>
+      <a href="/artists.html">Artists</a>
       <span>/</span>
-      Gustave Caillebotte
+      Hilma af Klint
     </nav>
 
     <!-- ── HERO: Portrait + Bio ────────────────────────── -->
     <section class="artist-hero">
       <div class="artist-hero-inner">
         <img
-          src="images/Pieces/Gustave_Caillebotte_-_Un_balcon%2C_Boulevard_Haussmann.jpg"
-          alt="Un balcon, boulevard Haussmann, painting by Gustave Caillebotte"
+          src="/images/Pieces/Hilma-af-Klint-uncropped.jpg"
+          alt="Portrait of Hilma af Klint"
           class="artist-portrait"
           loading="eager"
         />
         <div class="artist-info">
-          <h1>Gustave Caillebotte</h1>
-          <p class="artist-meta">Born 1848, Paris, France — Died 1894, Gennevilliers, France</p>
-        <div class="artist-bio" id="bio">
-          <p>Gustave Caillebotte painted the modern life of Paris, often from strikingly elevated or cropped viewpoints.</p>
-          <p>His city scenes, interiors and portraits combine close observation with an unusual sense of space and perspective.</p>
-          <p>He also helped sustain the Impressionist group as an exhibition organiser, collector and supporter of fellow artists.</p>
-        </div>
-          <div id="bioExtended" class="bio-extended-source" hidden aria-hidden="true">
-            <p>Born in Paris in 1848, Caillebotte studied law before turning to painting. He joined the Impressionists in the 1870s and took an active role in organising their exhibitions.</p>
-            <p>Parisian streets and the new buildings of Haussmann's city became recurring subjects. Views from windows and balconies allowed him to explore steep perspectives and the changing experience of urban life.</p>
-            <p>Alongside his painting, Caillebotte collected works by his contemporaries and supported their careers. His bequest later brought an important collection of Impressionist paintings into French public ownership.</p>
-          </div>
+          <h1>Hilma af Klint</h1>
+          <p class="artist-meta">Born 1862, Solna, Sweden — Died 1944, Danderyd, Sweden</p>
+        <div class="artist-bio" id="bio"><p>Hilma af Klint became an artist after studying at Stockholm’s Royal Academy of Fine Arts.</p><p>Trained in traditional painting, she developed a radical abstract style driven by spirituality, nature, and geometry.</p><p>Using bold forms, color, and symbols, she explored inner worlds through painting.</p></div>
+          <div id="bioExtended" class="bio-extended-source" hidden aria-hidden="true"><p>Hilma af Klint became an artist after studying at Stockholm’s Royal Academy of Fine Arts.</p><p>Trained in traditional painting, she developed a radical abstract style driven by spirituality, nature, and geometry.</p><p>Using bold forms, color, and symbols, she explored inner worlds through painting.</p></div>
           <div class="artist-cta-row">
             <a href="#bio" class="btn-outline">read full biography</a>
           </div>
@@ -1216,12 +1204,12 @@
           <div class="works-grid">
 
         <a href="#" class="work-card">
-          <figure><img src="images/Pieces/Gustave_Caillebotte_-_Rue_Hale%CC%81vy%2C_vue_d'un_sixie%CC%80me_e%CC%81tage.jpg" alt="Rue Halévy, vue d’un sixième étage, 1878" width="1280" height="1044" loading="eager" decoding="async" /></figure>
-          <div class="work-card-body"><p class="work-card-artist">Gustave Caillebotte</p><p class="work-card-title">Rue Halévy, vue d’un sixième étage, <span class="work-card-date">1878</span></p><p class="work-card-detail">Oil on canvas</p></div>
+          <figure><img src="/images/Pieces/the-swan-no-10-af-klint.jpg" alt="The Swan, No. 10" width="800" height="1000" loading="eager" decoding="async" /></figure>
+          <div class="work-card-body"><p class="work-card-artist">Hilma af Klint</p><p class="work-card-title">The Swan, No. 10</p></div>
         </a>
         <a href="#" class="work-card">
-          <figure><img src="images/Pieces/Gustave_Caillebotte_-_Un_balcon%2C_Boulevard_Haussmann.jpg" alt="Un balcon, boulevard Haussmann, circa 1880" width="2224" height="3200" loading="eager" decoding="async" /></figure>
-          <div class="work-card-body"><p class="work-card-artist">Gustave Caillebotte</p><p class="work-card-title">Un balcon, boulevard Haussmann, <span class="work-card-date">c. 1880</span></p><p class="work-card-detail">Oil on canvas</p></div>
+          <figure><img src="/images/Pieces/Hilma_af_Klint_—_The_Ten_Largest_—_Number_7_Adulthood.jpg" alt="The Ten Largest, No. 7, Adulthood" width="800" height="1000" loading="eager" decoding="async" /></figure>
+          <div class="work-card-body"><p class="work-card-artist">Hilma af Klint</p><p class="work-card-title">The Ten Largest, No. 7, Adulthood</p></div>
         </a>
 
           </div>
@@ -1240,7 +1228,7 @@
         </div>
 
         <div id="panel-biography" class="artist-tab-panel artist-tab-panel--cv" role="tabpanel" aria-labelledby="tab-biography" data-panel="biography" hidden>
-          <div class="works-grid"><p>Born in Paris in 1848, Gustave Caillebotte became a painter of modern urban life and a key participant in the Impressionist exhibitions.</p><p>His bold perspectives gave Parisian streets, balconies and interiors a distinctive visual energy.</p><p>As a collector and patron, he also played an important part in preserving and promoting the work of his fellow Impressionists.</p></div>
+          <div class="works-grid"><p>Hilma af Klint became an artist after studying at Stockholm’s Royal Academy of Fine Arts.</p><p>Trained in traditional painting, she developed a radical abstract style driven by spirituality, nature, and geometry.</p><p>Using bold forms, color, and symbols, she explored inner worlds through painting.</p></div>
         </div>
 
       </div>
@@ -1270,7 +1258,7 @@
       </nav>
 
       <nav class="footer-links" aria-label="Footer">
-        <a href="library.html">Library</a>
+        <a href="/library.html">Library</a>
         <a href="#">The Gallery</a>
         <a href="#">Jobs</a>
         <a href="#">Terms</a>
@@ -1526,7 +1514,7 @@
             }
           }
           if (artUrl) {
-            roomArt.src = 'images/artist-page/View-in-room.png';
+            roomArt.src = '/images/artist-page/View-in-room.png';
             roomArt.alt = imgEl.alt ? imgEl.alt + ', in a room setting' : 'Artwork in a room setting';
           }
         } else if (!roomMode && roomArt) {

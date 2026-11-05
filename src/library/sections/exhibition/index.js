@@ -10,14 +10,14 @@ export function ExhibitionGrid(exhibitions) {
 export function ExhibitionText() {
   return `
     <section class="section-embed">
-      <iframe src="/exhibition-text-library.html" title="Exhibition text with read-more modal" loading="eager"></iframe>
+      <iframe src="/studies/exhibitions/exhibition-text-library.html" title="Exhibition text with read-more modal" loading="eager"></iframe>
     </section>`;
 }
 
 export function ExhibitionFilters() {
   return `
     <section class="section-embed">
-      <iframe src="/exhibitions-library.html" title="Exhibition filters with status pills and year selector" loading="eager"></iframe>
+      <iframe src="/studies/exhibitions/exhibitions-library.html" title="Exhibition filters with status pills and year selector" loading="eager"></iframe>
     </section>`;
 }
 

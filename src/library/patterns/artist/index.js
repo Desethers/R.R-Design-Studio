@@ -22,7 +22,7 @@ const artistBioEngines = [
 function ArtistBioExpandSample(artist, engine) {
   const pageArtist = {
     ...artist,
-    image: "/images/Pieces/Vincent%20van%20Gogh/MV5BOTg5MTU4NDk1Nl5BMl5BanBnXkFtZTgwNjE3MjY3NjM%40._V1_.jpg",
+    image: "/images/artists/Vincent%20van%20Gogh/MV5BOTg5MTU4NDk1Nl5BMl5BanBnXkFtZTgwNjE3MjY3NjM%40._V1_.jpg",
     born: "Born 1853, Zundert, Netherlands — Died 1890, Auvers-sur-Oise, France",
     intro: "Vincent van Gogh became an artist at twenty-seven after working as an art dealer and preacher.",
   };
@@ -46,7 +46,7 @@ function ArtistBioExpandSample(artist, engine) {
         </div>
       </button>
       <div class="pattern-artist-bio__full-page" aria-hidden="true">
-        <iframe src="/artist-van-gogh-expand-lab.html" title="Prototype Expand Lab de Vincent Van Gogh" loading="eager"></iframe>
+        <iframe src="/studies/artists/artist-van-gogh-expand-lab.html" title="Prototype Expand Lab de Vincent Van Gogh" loading="eager"></iframe>
         <button type="button" class="pattern-artist-bio__close-full" data-artist-bio-close aria-label="Refermer la page ${engine.name} de Vincent Van Gogh">×</button>
       </div>
     </article>`;
@@ -55,12 +55,12 @@ function ArtistBioExpandSample(artist, engine) {
 function ArtistBioStorySample(artist) {
   const portraitArtist = {
     ...artist,
-    image: "/images/Pieces/Vincent%20van%20Gogh/MV5BOTg5MTU4NDk1Nl5BMl5BanBnXkFtZTgwNjE3MjY3NjM%40._V1_.jpg",
+    image: "/images/artists/Vincent%20van%20Gogh/MV5BOTg5MTU4NDk1Nl5BMl5BanBnXkFtZTgwNjE3MjY3NjM%40._V1_.jpg",
   };
   const starryNight = {
     artist: "Vincent van Gogh",
     title: "The Starry Night",
-    image: "/images/Pieces/Vincent%20van%20Gogh/VanGogh-starry_night_ballance1.jpg",
+    image: "/images/artists/Vincent%20van%20Gogh/VanGogh-starry_night_ballance1.jpg",
   };
 
   return `

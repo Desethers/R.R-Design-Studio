@@ -83,6 +83,6 @@ export function ArtistGridOnly(artists) {
 export function ArtistFullPage() {
   return `
     <section class="section-embed section-embed--tall">
-      <iframe src="/artist-van-gogh-library.html" title="Vincent van Gogh artist page" loading="eager"></iframe>
+      <iframe src="/studies/artists/artist-van-gogh-library.html" title="Vincent van Gogh artist page" loading="eager"></iframe>
     </section>`;
 }

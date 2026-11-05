@@ -16,8 +16,8 @@ export const galleryTemplates = [
     scope: "Accueil initial : présentation du programme et du conseil sans cartes illustrées",
     social: "À définir",
     updated: "2026-09",
-    href: "/darmo-home.html",
-    preview: { type: "page", src: "/darmo-home.html" },
+    href: "/studies/gallery-sites/darmo-home.html",
+    preview: { type: "page", src: "/studies/gallery-sites/darmo-home.html" },
   },
   {
     id: "darmo-home-v2",
@@ -27,8 +27,8 @@ export const galleryTemplates = [
     scope: "Accueil avec deux cartes illustrées et navigation Artists / Programme / Art Advisory",
     social: "À définir",
     updated: "2026-09",
-    href: "/darmo-home-v2.html",
-    preview: { type: "page", src: "/darmo-home-v2.html" },
+    href: "/studies/gallery-sites/darmo-home-v2.html",
+    preview: { type: "page", src: "/studies/gallery-sites/darmo-home-v2.html" },
   },
   {
     id: "galerie-base",
@@ -49,7 +49,7 @@ export const galleryTemplates = [
     scope: "Exposition collective « Les Objecteurs » : vues d’exposition et étude d’interactions",
     social: "À définir",
     updated: "2026-09",
-    href: "/les-objecteurs.html",
+    href: "/studies/gallery-sites/les-objecteurs.html",
     preview: { type: "image", src: "/images/exhibitions/les-objecteurs/vuefront_objecteurs-5.jpg" },
   },
   {
@@ -60,8 +60,8 @@ export const galleryTemplates = [
     scope: "Direction éditoriale text-led : accueil, index artistes, fiches artistes et expositions",
     social: "À définir",
     updated: "2026-09",
-    href: "/in-situ-fabienne-leclerc.html",
-    preview: { type: "page", src: "/in-situ-fabienne-leclerc.html" },
+    href: "/studies/gallery-sites/in-situ-fabienne-leclerc.html",
+    preview: { type: "page", src: "/studies/gallery-sites/in-situ-fabienne-leclerc.html" },
   },
   {
     id: "galerie-allen-jason-dodge",
@@ -71,7 +71,7 @@ export const galleryTemplates = [
     scope: "Jason Dodge : page-source avec textes, vues d’exposition et légendes extraits, prête à redesign",
     social: "À définir",
     updated: "2026-09",
-    href: "/galerie-allen-jason-dodge.html",
+    href: "/studies/gallery-sites/galerie-allen-jason-dodge.html",
     preview: { type: "image", src: "/images/exhibitions/galerie-allen-jason-dodge/jd26exh2.jpg" },
   },
 ];

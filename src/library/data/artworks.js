@@ -15,7 +15,7 @@ export const artworks = [
     year: "1889",
     medium: "Oil on canvas",
     dimensions: "93.4 x 74 cm",
-    image: "/images/Pieces/Vincent%20van%20Gogh/cypresses-1889.jpg",
+    image: "/images/artists/Vincent%20van%20Gogh/cypresses-1889.jpg",
   },
   {
     id: "van-gogh-irises",
@@ -24,7 +24,7 @@ export const artworks = [
     year: "1890",
     medium: "Oil on canvas",
     dimensions: "73.7 x 92.1 cm",
-    image: "/images/Pieces/Vincent%20van%20Gogh/irises-1890.jpg",
+    image: "/images/artists/Vincent%20van%20Gogh/irises-1890.jpg",
   },
   {
     id: "klint-swan",
