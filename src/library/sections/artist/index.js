@@ -13,7 +13,7 @@ export function ArtistIndex(artists) {
 function artistItem(artist, order, linked = true) {
   const hasLink = linked === true || (linked === "van-gogh-only" && artist.id === "vincent-van-gogh");
   const tag = hasLink ? "a" : "div";
-  const href = hasLink ? ' href="/artist.html"' : "";
+  const href = hasLink ? ' href="/pages/site/artist.html"' : "";
   return `
     <${tag}${href} data-artist-id="${artist.id}" data-image-format="${order % 2 === 0 ? "landscape" : "portrait"}" class="section-artist-grid__item" style="order:${order}">
       <figure>${objectImage({ ...artist, artist: artist.name, title: "Portrait" }, "section-artist-grid__image")}</figure>

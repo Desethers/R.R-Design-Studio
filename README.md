@@ -8,7 +8,8 @@ Pour retrouver les pages directement, ouvrir [l’index des études](studies/ind
 
 | Dossier | Contenu |
 | --- | --- |
-| Racine | Pages principales du site (`index.html`, artistes, expositions), `library.html`, feuille de style commune et configuration npm |
+| Racine | Accueil `index.html`, entrée `library.html`, feuille de style commune et configuration npm |
+| `pages/site/` | Pages du site principal : artistes, fiches artistes, expositions et fiches expositions |
 | `library/` | Entrées et pages de la bibliothèque de composants |
 | `studies/artists/` | Études de pages artistes : Van Gogh, Hilma af Klint, Caillebotte |
 | `studies/exhibitions/` | Études d’expositions et variantes de présentation |

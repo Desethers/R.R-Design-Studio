@@ -3,8 +3,8 @@ export function MinimalGalleryHeader() {
     <header class="pattern-gallery-header">
       <a class="pattern-gallery-header__brand" href="/index.html">FOR ART</a>
       <nav aria-label="Gallery navigation">
-        <a href="/artists.html">Artists</a>
-        <a href="/exhibitions.html">Exhibitions</a>
+        <a href="/pages/site/artists.html">Artists</a>
+        <a href="/pages/site/exhibitions.html">Exhibitions</a>
         <a href="#">Gallery</a>
       </nav>
       <button type="button" aria-label="Open menu"><span></span><span></span></button>

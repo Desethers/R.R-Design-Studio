@@ -36,8 +36,8 @@
 
   function exhibitionUrl(exhibition) {
     return exhibition && exhibition.slug
-      ? './exhibition.html?slug=' + encodeURIComponent(exhibition.slug)
-      : './exhibitions.html';
+      ? '/pages/site/exhibition.html?slug=' + encodeURIComponent(exhibition.slug)
+      : '/pages/site/exhibitions.html';
   }
 
   function setText(root, selector, value) {
@@ -145,7 +145,7 @@
     replaceCards('#featured-artworks', (artworks || []).map(function (artwork) {
       return {
         href: artwork.artist && artwork.artist.slug
-          ? './artist.html?slug=' + encodeURIComponent(artwork.artist.slug)
+          ? '/pages/site/artist.html?slug=' + encodeURIComponent(artwork.artist.slug)
           : '#',
         imageUrl: artwork.mainImage && artwork.mainImage.url,
         imageAlt: artwork.title,
@@ -159,7 +159,7 @@
   function updateFeaturedArtists(artists) {
     replaceCards('#featured-artists', (artists || []).map(function (artist) {
       return {
-        href: artist.slug ? './artist.html?slug=' + encodeURIComponent(artist.slug) : './artists.html',
+        href: artist.slug ? '/pages/site/artist.html?slug=' + encodeURIComponent(artist.slug) : '/pages/site/artists.html',
         imageUrl: artist.portrait && artist.portrait.url,
         imageAlt: artist.name,
         title: artist.name

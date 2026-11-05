@@ -3,7 +3,7 @@ import { objectImage } from "../../primitives/index.js";
 export function ExhibitionCardMinimal(exhibition) {
   return `
     <article class="pattern-exhibition-card">
-      <a href="/exhibition-your-friends.html">
+      <a href="/pages/site/exhibition-your-friends.html">
         <figure>
           <div class="pattern-exhibition-card__media">${objectImage(exhibition, "pattern-exhibition-card__image")}</div>
           <figcaption>
@@ -25,14 +25,14 @@ export function ExhibitionRow(exhibition) {
       <p><em>${exhibition.title}</em></p>
       <p>${exhibition.venue}</p>
       <time>${exhibition.dates}</time>
-      <a href="/exhibition-your-friends.html" aria-label="Open ${exhibition.title}">↗</a>
+      <a href="/pages/site/exhibition-your-friends.html" aria-label="Open ${exhibition.title}">↗</a>
     </article>`;
 }
 
 export function ExhibitionCardImageFirst(exhibition) {
   return `
     <article class="pattern-exhibition-card pattern-exhibition-card--image-first">
-      <a href="/exhibition-your-friends.html">
+      <a href="/pages/site/exhibition-your-friends.html">
         <figure>
           <div class="pattern-exhibition-card__media">${objectImage(exhibition, "pattern-exhibition-card__image")}</div>
           <figcaption>

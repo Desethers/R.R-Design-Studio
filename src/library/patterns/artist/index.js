@@ -3,7 +3,7 @@ import { objectImage } from "../../primitives/index.js";
 export function ArtistCardMinimal(artist) {
   return `
     <article class="pattern-artist-card">
-      <a href="/artist.html">
+      <a href="/pages/site/artist.html">
         <figure>
           <div class="pattern-artist-card__media">${objectImage({...artist, artist: artist.name, title: "Portrait"}, "pattern-artist-card__image")}</div>
           <figcaption><h3>${artist.name}</h3><p>${artist.location}</p></figcaption>
@@ -207,6 +207,6 @@ export function ArtistIndexRow(artist, index = 0) {
       <h3>${artist.name}</h3>
       <p>${artist.location}</p>
       <p>${artist.years}</p>
-      <a href="/artist.html" aria-label="Open ${artist.name}">↗</a>
+      <a href="/pages/site/artist.html" aria-label="Open ${artist.name}">↗</a>
     </article>`;
 }

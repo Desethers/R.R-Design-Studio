@@ -7,7 +7,7 @@
  *   • API disponible → les cartes correspondantes sont actualisées depuis Sanity
  *   • API indisponible → fallback silencieux, le HTML statique reste affiché
  *
- * Inclure dans artists.html :
+ * Inclure dans /pages/site/artists.html :
  *   <script>window.GALLERY_API = 'https://ton-dashboard.vercel.app';</script>
  *   <script src="scripts/artists-live.js" defer></script>
  */
@@ -18,12 +18,12 @@
   const API_URL  = API_BASE + '/api/public/artists'
 
   /**
-   * Chaque artiste possède une page dynamique générique : artist.html?slug=…
+   * Chaque artiste possède une page dynamique générique : /pages/site/artist.html?slug=…
    * artist-page-live.js hydrate la page depuis Gallery OS — plus aucun mapping
    * manuel à maintenir.
    */
   function artistHref(artist) {
-    return artist.slug ? 'artist.html?slug=' + encodeURIComponent(artist.slug) : '#'
+    return artist.slug ? '/pages/site/artist.html?slug=' + encodeURIComponent(artist.slug) : '#'
   }
 
   // ── Utilitaires ─────────────────────────────────────────────────────────

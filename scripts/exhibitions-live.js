@@ -7,7 +7,7 @@
  *   • API disponible → les 3 listes sont vidées et reconstruites depuis Sanity
  *   • API indisponible → fallback silencieux, le statique buildLists() reste affiché
  *
- * Inclure dans exhibitions.html :
+ * Inclure dans /pages/site/exhibitions.html :
  *   <script>window.GALLERY_API = 'https://ton-dashboard.vercel.app';</script>
  *   <script src="scripts/exhibitions-live.js" defer></script>
  */
@@ -22,7 +22,7 @@
    * Ajouter une entrée ici quand une page expo est créée.
    */
   const PAGE_MAP = {
-    'your-friends': 'exhibition-your-friends.html',
+    'your-friends': '/pages/site/exhibition-your-friends.html',
     // 'still-life-living-form': 'exhibition-still-life.html',
   }
 
@@ -66,7 +66,7 @@
     const name  = artistNames(exh.artists)
     const img   = imgUrl(exh, 800)
     const city  = (exh.venue && exh.venue.city) ? exh.venue.city : ''
-    const href  = PAGE_MAP[exh.slug] || (exh.slug ? 'exhibition.html?slug=' + exh.slug : '#')
+    const href  = PAGE_MAP[exh.slug] || (exh.slug ? '/pages/site/exhibition.html?slug=' + exh.slug : '#')
     const title = escHtml(exh.title || '')
 
     return (

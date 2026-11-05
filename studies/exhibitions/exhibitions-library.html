@@ -85,7 +85,7 @@
       <!-- Liste "master" : les cartes sont redistribuées en JS dans les 3 grilles ci-dessus -->
       <ul class="cards-grid three-col" role="list" id="exhListMaster" hidden>
         <li data-status="current" data-year="2026" data-location="gstaad">
-          <a href="/exhibition-your-friends.html" class="card">
+          <a href="/pages/site/exhibition-your-friends.html" class="card">
             <figure class="card-img">
               <img src="/images/exhibitions/Exhibition1.png" alt="Exhibition 1" loading="lazy" />
             </figure>
@@ -1549,10 +1549,10 @@
   <script>
     (function () {
       // Quand on clique sur "Exhibitions" (déjà sur la page), remonter en haut pour afficher la barre de filtres
-      var exhLinks = document.querySelectorAll('a[href="/exhibitions.html"], a[href="/exhibitions.html"]');
+      var exhLinks = document.querySelectorAll('a[href="/pages/site/exhibitions.html"], a[href="/pages/site/exhibitions.html"]');
       exhLinks.forEach(function (link) {
         link.addEventListener('click', function (e) {
-          if (window.location.pathname.endsWith('exhibitions.html') || window.location.pathname.endsWith('/exhibitions')) {
+          if (window.location.pathname.endsWith('/pages/site/exhibitions.html') || window.location.pathname.endsWith('/exhibitions')) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
             document.body.classList.add('exh-at-top');
@@ -1586,7 +1586,7 @@
     });
   </script>
   <script>
-    // Libellés fictifs : lieux inventés + artistes alignés sur artists.html + titres d'expo inventés.
+    // Libellés fictifs : lieux inventés + artistes alignés sur /pages/site/artists.html + titres d'expo inventés.
     (function () {
       var locationNames = {
         paris: 'Lutetia',
@@ -1598,7 +1598,7 @@
         london: 'Londara'
       };
 
-      /* Même ordre que la grille artists.html */
+      /* Même ordre que la grille /pages/site/artists.html */
       var galleryArtists = [
         'Sacha Elron',
         'Audrey Plen',

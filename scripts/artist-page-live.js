@@ -1,7 +1,7 @@
 /**
  * Artist Page Live — Slot hydration
  * ─────────────────────────────────────────────────────────────────────────────
- * Fills the static artist page (artist.html) with data from Gallery OS for the
+ * Fills the static artist page (/pages/site/artist.html) with data from Gallery OS for the
  * artist identified by ?slug= (or window.ARTIST_SLUG). Mirrors the approach of
  * exhibition-page-live.js: it only updates text / src / innerHTML of existing
  * nodes and rebuilds the works grid with the exact same markup — never touches
@@ -10,7 +10,7 @@
  *   • API reachable + artist found → hero, bio, portrait and works are filled
  *   • API unreachable / no slug    → silent exit, static skeleton preserved
  *
- * Setup — before </body> on artist.html:
+ * Setup — before </body> on /pages/site/artist.html:
  *   <script>window.GALLERY_API = 'https://gallery-os-ten.vercel.app';</script>
  *   <script src="scripts/artist-page-live.js" defer></script>
  */
@@ -138,7 +138,7 @@
     // Breadcrumb (last text node after the separator)
     var crumb = document.querySelector('.breadcrumb')
     if (crumb && data.name) {
-      crumb.innerHTML = '<a href="artists.html">Artists</a><span>/</span>' + esc(data.name)
+      crumb.innerHTML = '<a href="/pages/site/artists.html">Artists</a><span>/</span>' + esc(data.name)
     }
 
     // Portrait — hide the element entirely when the artist has no portrait
