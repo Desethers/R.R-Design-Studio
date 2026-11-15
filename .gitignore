@@ -7,3 +7,6 @@ node_modules/
 # Next.js build output (web/ subproject)
 .next/
 web/.next/
+test-results/
+playwright-report/
+dist/

@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Morning Briefing — Gallery OS</title>
+<link rel="stylesheet" href="../../src/tools/morning-briefing/style.css">
+<script type="module" src="../../src/tools/morning-briefing/app.js"></script></head>
+<body>
+  <header><div><h1>Morning Briefing</h1><p>Assistant Gallery OS</p></div><a id="open-source" target="_blank" rel="noopener">Ouvrir dans Gallery OS ↗</a></header>
+  <main>
+    <div id="connection" role="status">Connexion à Gallery OS…</div>
+    <section id="offline" hidden aria-labelledby="offline-heading"><h2 id="offline-heading">Gallery OS n’est pas disponible.</h2><p>L’assistant reste hébergé dans son projet d’origine. Lance son serveur local, puis réessaie.</p><code>npm run dev:gallery-os</code><div><button id="retry" type="button">Réessayer</button></div></section>
+    <iframe id="assistant" title="Chatbox LLM Gallery OS" hidden referrerpolicy="origin"></iframe>
+  </main>
+  <footer>Chat lié à Gallery OS · Les résumés automatiques email et calendrier ne sont pas encore connectés.</footer>
+</body></html>

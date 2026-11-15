@@ -1,0 +1,11 @@
+/* Only Tools previews use these rules. Existing previews retain their layout. */
+.library-workspace[data-area="tools"] .workspace-screen,
+.library-workspace[data-area="tools"] .workspace-screen__canvas { background: #fff; }
+.library-workspace[data-area="tools"] .workspace-screen__canvas { padding: 16px 24px 24px calc(var(--panel-width, 280px) + 24px); overflow: hidden; }
+.library-workspace[data-area="tools"] .workspace-screen__object { min-width: 0; max-width: none; height: 100%; }
+.library-workspace[data-area="tools"] .section-embed { min-height: 0; height: 100%; border-radius: 0; }
+.library-workspace[data-area="tools"] .workspace-tile__content { width: 1000px; height: 750px; }
+.library-workspace[data-area="tools"] .workspace-tile__content .section-embed { height: 750px; }
+@media (max-width: 760px) {
+  .library-workspace[data-area="tools"] .workspace-screen__canvas { padding: 12px; }
+}

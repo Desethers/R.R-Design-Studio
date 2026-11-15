@@ -1,4 +1,5 @@
 import { artworks, featuredArtwork } from "./data/artworks.js";
+import { toolEntries } from "../tools/registry.js";
 import { artistDirectory, artists } from "./data/artists.js";
 import { exhibitions } from "./data/exhibitions.js";
 import { ArtworkCardCompact, ArtworkCardHoverInfo, ArtworkCardInquire, ArtworkCardMinimal, ArtworkMeta } from "./patterns/artwork/index.js";
@@ -15,6 +16,7 @@ import { ExhibitionInstallationViews } from "./sections/exhibition/installation-
 import { GalleryTemplatePage, GalleryTemplatesDirectory } from "./sections/templates/index.js";
 
 export const registry = [
+  ...toolEntries,
   { id: "exhibition-embracing-01", code: "E10", family: "exhibition-page", name: "Embracing Grounds / In Situ", category: "exhibition", type: "page", interaction: "click", tags: ["exhibition", "in-situ", "slideshow", "fullscreen"], updated: "2026-09", layout: "full", render: () => '<section class="section-embed section-embed--tall"><iframe src="/studies/exhibitions/exhibition-embracing-grounds.html#oeuv-2" title="Embracing Grounds — exposition In Situ" loading="eager" allowfullscreen></iframe></section>' },
   { id: "exhibition-embracing-02", code: "E11", family: "exhibition-page", name: "Embracing Grounds / Filmstrip", category: "exhibition", type: "page", interaction: "scroll", tags: ["exhibition", "in-situ", "filmstrip", "thumbnails", "fullscreen"], updated: "2026-09", layout: "full", render: () => '<section class="section-embed section-embed--tall"><iframe src="/studies/exhibitions/exhibition-embracing-grounds-filmstrip.html#oeuv-2" title="Embracing Grounds — navigation par miniatures" loading="lazy" allowfullscreen></iframe></section>' },
   { id: "template-in-situ-01", href: "/studies/gallery-sites/in-situ-fabienne-leclerc.html", code: "T04", family: "gallery-template", name: "In Situ — Fabienne Leclerc", category: "templates", type: "page", interaction: "scroll", tags: ["homepage", "text-led", "in-situ", "redesign"], updated: "2026-09", layout: "full", render: () => GalleryTemplatePage("in-situ-fabienne-leclerc") },

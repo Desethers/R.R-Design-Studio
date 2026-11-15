@@ -6,6 +6,8 @@ Pour retrouver les pages directement, ouvrir [l’index des études](studies/ind
 
 ## Où se trouve quoi ?
 
+Les mini-apps réutilisables sont dans la section **Tools** de la bibliothèque. Le [guide Tools](docs/tools.md) explique la configuration client, l’import CSV et le déploiement indépendant du générateur PDF.
+
 | Dossier | Contenu |
 | --- | --- |
 | Racine | Accueil `index.html`, entrée `library.html`, feuille de style commune et configuration npm |
@@ -15,6 +17,7 @@ Pour retrouver les pages directement, ouvrir [l’index des études](studies/ind
 | `studies/exhibitions/` | Études d’expositions et variantes de présentation |
 | `studies/gallery-sites/` | Études de sites de galeries : Darmo, In Situ, Les Objecteurs, Galerie Allen |
 | `src/library/` | Données, composants et comportement de la bibliothèque |
+| `tools/`, `src/tools/` | Entrées des mini-apps, configuration client, logique et modèles PDF |
 | `src/styles/`, `src/in-situ/`, `src/objecteurs/` | Styles et code propres aux études |
 | `images/` | Images utilisées par le site et les études ; Van Gogh et Caillebotte sont regroupés dans `images/artists/` |
 | `scripts/` | Scripts utilitaires du site principal |

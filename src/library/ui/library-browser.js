@@ -1,4 +1,10 @@
 import { viewButtons } from "./view-icons.js";
+import { toolDefinitions } from "../../tools/registry.js";
+
+const toolsStyle = document.createElement('link');
+toolsStyle.rel = 'stylesheet';
+toolsStyle.href = '/src/tools/studio.css';
+document.head.append(toolsStyle);
 
 function familyName(value) {
   return value.replaceAll("-", " ");
@@ -37,6 +43,7 @@ const libraryGroups = [
       { id: "galerie-template", label: "Galerie Template", componentIds: ["template-galerie-01"] },
     ],
   },
+  { id: 'tools', label: 'Tools', categories: toolDefinitions.map(tool => ({ id: tool.id, label: tool.name, componentIds: [`tool-${tool.id}`] })) },
 ];
 
 function categoryEntries(registry, category) {
@@ -82,6 +89,7 @@ function workspaceGrid(entries, activeId, openInWorkspace = false) {
 }
 
 const categoryIcons = {
+  ...Object.fromEntries(toolDefinitions.map(tool => [tool.id, tool.icon])),
   home: "⌂", artist: "◎", exhibition: "▦", artwork: "□", shop: "◇",
   navigation: "↳", "artwork-viewing": "◉", editorial: "¶", "galerie-template": "▭", "les-objecteurs": "▭", "in-situ-fabienne-leclerc": "▭", "galerie-allen": "▭",
 };
@@ -290,11 +298,11 @@ export function renderLibraryBrowser(root, registry) {
       <button type="button" class="workspace-panel__toggle" aria-label="Collapse panel" aria-pressed="false">‹</button>
       <aside class="workspace-panel">
         <header class="workspace-panel__header">
-          <div><p>R.R Design Studio</p><span>forart.world</span></div>
+          <div><p>R.R Design Studio</p></div>
         </header>
         <div class="workspace-panel__controls">
           <label>
-            <span>Search</span>
+            <span class="sr-only">Search</span>
             <input type="search" placeholder="Search components..." autocomplete="off">
           </label>
         </div>
@@ -509,6 +517,10 @@ export function renderLibraryBrowser(root, registry) {
     }
     const button = event.target.closest("[data-category-id]");
     if (!button) return;
+    if (button.dataset.groupId === 'tools') {
+      selectEntry(`tool-${button.dataset.categoryId}`);
+      return;
+    }
     if (button.dataset.groupId === "gallery-sites" && button.dataset.categoryId === "darmo") {
       selectEntry("template-darmo-01");
       return;
