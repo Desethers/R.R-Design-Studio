@@ -53,6 +53,10 @@ test('sample selection, layout, real preview and downloadable PDF',async({page},
   await page.getByRole('button',{name:'Preview document'}).click();
   await expect(page.getByRole('button',{name:'Download PDF'})).toBeEnabled({timeout:60000});
   await expect(page.locator('.pdf-page canvas')).toHaveCount(2,{timeout:30000});
+  await expect(page.locator('.pdf-page canvas').first()).toHaveAttribute('data-rendered','true',{timeout:30000});
+  expect(await page.locator('.pdf-page canvas').first().evaluate(canvas=>canvas.width)).toBeGreaterThanOrEqual(1920);
+  await page.locator('.pdf-page canvas').last().scrollIntoViewIfNeeded();
+  await expect(page.locator('.pdf-page canvas').last()).toHaveAttribute('data-rendered','true',{timeout:30000});
   await expect(page.locator('.preview-warnings')).toHaveCount(0);
   const event=page.waitForEvent('download');await page.getByRole('button',{name:'Download PDF'}).click();
   const download=await event;const output=info.outputPath('selection.pdf');await download.saveAs(output);
@@ -126,4 +130,70 @@ test('long CSV metadata continues across pages without truncation',async({page},
   const text=await extractPDFText(page,bytes);
   expect(text.join(' ')).toContain('END-OF-RECORD');
   expect(text[1]).toContain('Details continued');
+});
+
+test('Gallery OS style grid/list switch preserves search and artwork selection',async({page},info)=>{
+ await page.goto('/tools/artwork-pdf/');
+ await expect(page.getByRole('button',{name:'Gallery view',exact:true})).toHaveAttribute('aria-pressed','true');
+ await page.locator('.art-card').first().locator('.art-image').click();
+ await expect(page.locator('[data-select="sample-1"]')).toBeChecked();
+ await expect(page.locator('.art-card').first().getByText('Selected',{exact:true})).toBeVisible();
+ await page.locator('.art-card').nth(1).locator('.art-meta').click();
+ await expect(page.locator('[data-select="sample-2"]')).toBeChecked();
+ await page.locator('[data-select="sample-2"]').focus();
+ await page.keyboard.press('Space');
+ await expect(page.locator('[data-select="sample-2"]')).not.toBeChecked();
+ for(const card of await page.locator('.art-card').all()){
+  const image=card.locator('.art-image'),checkbox=card.getByRole('checkbox');
+  expect((await checkbox.boundingBox()).y).toBeGreaterThanOrEqual((await image.boundingBox()).y+(await image.boundingBox()).height);
+ }
+ await page.screenshot({path:info.outputPath('cards-desktop.png'),fullPage:true});
+ await page.getByRole('button',{name:'Compact list view',exact:true}).click();
+ await expect(page.getByRole('table')).toBeVisible();
+ await expect(page.locator('[data-select="sample-1"]')).toBeChecked();
+ await expect(page.getByRole('columnheader',{name:'Artist',exact:true})).toBeVisible();
+ await page.locator('[data-select="sample-2"]').check();
+ await page.getByRole('searchbox').fill('Monet');
+ await expect(page.locator('.artwork-table tbody tr')).toHaveCount(1);
+ await page.getByRole('button',{name:'Gallery view',exact:true}).click();
+ await expect(page.locator('.art-card')).toHaveCount(1);
+ await expect(page.locator('[data-select="sample-1"]')).toBeChecked();
+ await page.getByRole('searchbox').fill('');
+ await expect(page.locator('[data-select="sample-2"]')).toBeChecked();
+ await expect(page.locator('#count')).toContainText('2 selected');
+ await page.getByRole('button',{name:'Compact list view',exact:true}).click();
+ await page.screenshot({path:info.outputPath('list-desktop.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.screenshot({path:info.outputPath('list-mobile.png'),fullPage:true});
+ await page.getByRole('button',{name:'Design your document'}).click();
+ await expect(page.locator('.order-item')).toHaveCount(2);
+ await page.getByRole('button',{name:'Preview document'}).click();
+ await expect(page.getByRole('button',{name:'Download PDF'})).toBeEnabled({timeout:60000});
+});
+
+test('sharp PDF preview adapts to Retina, resizing and navigation',async({browser},info)=>{
+ const context=await browser.newContext({viewport:{width:1800,height:1100},deviceScaleFactor:3});
+ const page=await context.newPage(),errors=[];page.on('pageerror',error=>errors.push(error.message));
+ try{
+  await page.goto('/tools/artwork-pdf/');
+  await page.locator('[data-select="sample-1"]').check();
+  await page.getByRole('button',{name:'Design your document'}).click();
+  await page.getByRole('button',{name:'Preview document'}).click();
+  const canvas=page.locator('.pdf-page canvas').first();
+  await expect(canvas).toHaveAttribute('data-rendered','true',{timeout:30000});
+  expect(await canvas.evaluate(element=>element.width/element.getBoundingClientRect().width)).toBeGreaterThanOrEqual(2.99);
+  await canvas.screenshot({path:info.outputPath('retina-preview.png')});
+  await page.setViewportSize({width:390,height:844});
+  await expect.poll(()=>canvas.evaluate(element=>element.width)).toBe(1920);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.getByRole('tab',{name:'Artworks'}).click();
+  await page.getByRole('tab',{name:'Preview'}).click();
+  await expect(canvas).toHaveAttribute('data-rendered','true',{timeout:30000});
+  await page.getByRole('tab',{name:'Artworks'}).click();
+  await page.getByText('Import guide',{exact:true}).click();
+  await expect(page.locator('.import-guide code')).toHaveText(['artist','title']);
+  await expect(page.getByRole('button',{name:'Sample CSV'})).toBeVisible();
+  expect(errors).toEqual([]);
+ }finally{await context.close();}
 });
